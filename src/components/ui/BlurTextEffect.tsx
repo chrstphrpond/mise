@@ -39,14 +39,19 @@ export function BlurTextEffect({
   }, [children]);
 
   return (
-    <span ref={containerRef} className={`inline-block ${className}`}>
+    <span
+      ref={containerRef}
+      className={`inline-block ${className}`}
+      aria-label={children}
+    >
       {children.split("").map((char, i) => (
         <span
           key={`${char}-${i}`}
+          aria-hidden="true"
           className="char inline-block"
           style={{ whiteSpace: "pre" }}
         >
-          {char === " " ? " " : char}
+          {char === " " ? " " : char}
         </span>
       ))}
     </span>
