@@ -28,10 +28,6 @@ export function Hero() {
     ? { scale: 1, opacity: 0.7 }
     : { scale: [1, 1.05, 1], opacity: [0.5, 0.85, 0.5] };
 
-  const gradientAnimate = prefersReducedMotion
-    ? { backgroundPosition: "0% 50%" }
-    : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] };
-
   return (
     <section ref={sectionRef} className="relative isolate overflow-hidden">
       <div
@@ -63,34 +59,11 @@ export function Hero() {
               <BlurTextEffect startIndex={CONNECTOR_START} srOnly={false}>
                 {`${HEADLINE_CONNECTOR} `}
               </BlurTextEffect>
-              <motion.span
-                aria-hidden
-                className="relative inline-block bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #6c523d 0%, #a27b5c 50%, #6c523d 100%)",
-                  backgroundSize: "200% 100%",
-                }}
-                initial={{ backgroundPosition: "0% 50%" }}
-                animate={gradientAnimate}
-                transition={
-                  prefersReducedMotion
-                    ? { duration: 0 }
-                    : {
-                        duration: 5,
-                        ease: "easeInOut",
-                        repeat: Infinity,
-                      }
-                }
-              >
-                <BlurTextEffect
-                  startIndex={HIGHLIGHT_START}
-                  blur={false}
-                  srOnly={false}
-                >
+              <span className="text-primary">
+                <BlurTextEffect startIndex={HIGHLIGHT_START} srOnly={false}>
                   {HEADLINE_HIGHLIGHT}
                 </BlurTextEffect>
-              </motion.span>
+              </span>
             </span>
           </h1>
 
