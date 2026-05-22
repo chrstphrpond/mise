@@ -169,7 +169,7 @@ function SolutionVisual() {
     <div className="relative">
       <div className="relative aspect-[4/5] sm:aspect-[5/4] rounded-3xl overflow-hidden ring-1 ring-line">
         <Image
-          src="/figma-assets/solution-cafe.png"
+          src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/solution-cafe.png"
           alt="Cafe operations"
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"

@@ -141,7 +141,7 @@ export function FAQ() {
             </div>
             <div className="relative min-h-[320px] lg:min-h-[480px] overflow-hidden">
               <Image
-                src="/figma-assets/cta-bg.png"
+                src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-bg.png"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -165,7 +165,7 @@ export function FAQ() {
                 >
                   <div className="overflow-hidden rounded-t-[16px] bg-white">
                     <Image
-                      src="/figma-assets/hero-ipad-screen.png"
+                      src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/hero-ipad-screen.png"
                       alt="Imapos POS dashboard preview"
                       width={2030}
                       height={1520}
