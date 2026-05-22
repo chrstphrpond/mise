@@ -191,7 +191,9 @@ export function Pricing() {
                   "relative flex h-full flex-col rounded-[22px] p-7 md:p-8 ring-1 transition-shadow duration-300",
                   p.highlighted
                     ? "bg-primary-90 ring-primary text-white shadow-[0_30px_45px_-15px_rgba(162,123,92,0.35)] lg:py-10"
-                    : "bg-surface ring-line text-ink-title hover:shadow-[0_20px_40px_-25px_rgba(12,12,12,0.18)]",
+                    : p.name === "Starter"
+                      ? "bg-gradient-to-b from-surface-cream to-surface ring-primary/20 text-ink-title hover:shadow-[0_24px_50px_-25px_rgba(162,123,92,0.35)]"
+                      : "bg-surface ring-line text-ink-title hover:shadow-[0_20px_40px_-25px_rgba(12,12,12,0.18)]",
                 )}
               >
                 <div className="flex items-center justify-between gap-2">

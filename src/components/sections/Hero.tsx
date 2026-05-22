@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import Image from "next/image";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { LogoStrip } from "@/components/sections/LogoStrip";
@@ -155,12 +155,12 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-8 flex flex-col sm:flex-row items-center gap-3"
           >
-            <MagneticButton href="#pricing" variant="primary" size="lg">
+            <Button href="#pricing" variant="primary" size="lg">
               Start Free Trial
-            </MagneticButton>
-            <MagneticButton href="/contact" variant="secondary" size="lg">
+            </Button>
+            <Button href="/contact" variant="secondary" size="lg">
               Book a Demo
-            </MagneticButton>
+            </Button>
           </motion.div>
         </div>
 

@@ -49,12 +49,12 @@ function Youtube(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const quickLinks = [
-  { href: "#solution", label: "Solution" },
-  { href: "#services", label: "Service" },
-  { href: "#features", label: "Features" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#testimonial", label: "Testimonial" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#solution", label: "Solution" },
+  { href: "/#services", label: "Service" },
+  { href: "/#features", label: "Features" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#testimonial", label: "Testimonial" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const utilityLinks = [
