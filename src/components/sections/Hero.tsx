@@ -161,6 +161,9 @@ export function Hero() {
             <Button href="/contact" variant="secondary" size="lg">
               Book a Demo
             </Button>
+            <Button href="/app" variant="ghost" size="lg" icon>
+              Try the demo
+            </Button>
           </motion.div>
         </div>
 
