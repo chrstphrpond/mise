@@ -1,10 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { SmoothScroll } from "@/components/visuals/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
 
 const dmSans = DM_Sans({
@@ -89,14 +85,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SmoothScroll>
-          <ScrollProgress />
-          <Navbar />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </SmoothScroll>
+        {children}
         <Analytics />
       </body>
     </html>
