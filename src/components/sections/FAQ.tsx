@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, X as XIcon, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 const faqs = [
   {
@@ -53,15 +54,7 @@ export function FAQ() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center gap-4"
           >
-            {/* Tag */}
-            <span
-              className="inline-flex items-center rounded-full px-4 py-1 text-base font-medium tracking-[-0.32px] text-white"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #a27b5c 0%, #6c523d 100%)",
-              }}
-            >
-              Support &amp; Help
-            </span>
+            <Eyebrow>Support &amp; Help</Eyebrow>
 
             {/* Heading + sub */}
             <div className="flex w-full max-w-[768px] flex-col items-center gap-6">
@@ -172,7 +165,7 @@ export function FAQ() {
           {/* Left content */}
           <div className="flex flex-1 flex-col items-start justify-center gap-8 p-8 md:p-12">
             <div className="flex w-full flex-col gap-6 text-white">
-              <h3 className="font-display text-[clamp(2rem,4vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.8px]">
+              <h3 className="font-display text-[clamp(2rem,4vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.8px] text-white">
                 Start Running Your F&amp;B Operations Smarter Today
               </h3>
               <p className="text-base leading-[1.5] tracking-[-0.32px]">

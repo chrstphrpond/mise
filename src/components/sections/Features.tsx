@@ -89,7 +89,7 @@ export function Features() {
             >
               <div className="grid grid-cols-1 items-stretch lg:grid-cols-2">
                 <div className="flex flex-col gap-6 justify-center p-8 md:p-12">
-                  <span className="self-start inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-70 px-4 py-1 text-sm font-medium text-white">
+                  <span className="self-start inline-flex items-center rounded-full bg-gradient-to-r from-primary to-primary-70 px-4 py-1 text-sm font-medium tracking-[-0.32px] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset]">
                     {f.tag}
                   </span>
                   <h3 className="text-3xl font-medium tracking-tight text-white md:text-[40px] md:leading-[1.05] max-w-xl">

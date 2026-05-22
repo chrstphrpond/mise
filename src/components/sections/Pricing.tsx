@@ -160,7 +160,7 @@ export function Pricing() {
           <motion.span
             animate={{ scale: yearly ? 1 : 0.95, opacity: yearly ? 1 : 0.7 }}
             transition={{ duration: 0.25 }}
-            className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium text-white shadow-sm"
+            className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium tracking-[-0.24px] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset]"
           >
             <Sparkles className="size-3" /> Save 20%
           </motion.span>
@@ -404,7 +404,7 @@ function BillingToggle({
 
 function PopularBadge() {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium text-white ring-1 ring-primary-70/70">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium tracking-[-0.24px] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset]">
       <Crown className="size-3.5" />
       Most Popular
     </span>

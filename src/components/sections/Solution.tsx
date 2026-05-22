@@ -14,6 +14,8 @@ type Tab = {
   title: string;
   description: string;
   bullets: string[];
+  image: string;
+  imageAlt: string;
 };
 
 const tabs: Tab[] = [
@@ -30,6 +32,9 @@ const tabs: Tab[] = [
       "Shift tip pool and barista clock-in built in",
       "Daily covers and best-seller view at the bar",
     ],
+    image:
+      "https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/solution-cafe.png",
+    imageAlt: "Cafe interior with shelves of beverages",
   },
   {
     id: "restaurant",
@@ -44,6 +49,9 @@ const tabs: Tab[] = [
       "KDS bumps tickets across hot, cold, and bar stations",
       "Split bills, voids, and comps logged to the server",
     ],
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80&auto=format&fit=crop",
+    imageAlt: "Restaurant dining room",
   },
   {
     id: "cloud",
@@ -58,6 +66,9 @@ const tabs: Tab[] = [
       "Driver handoff timestamps with prep-to-pickup tracking",
       "Per-channel margin after commissions and packaging",
     ],
+    image:
+      "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1200&q=80&auto=format&fit=crop",
+    imageAlt: "Commercial kitchen during service",
   },
   {
     id: "multi",
@@ -72,6 +83,9 @@ const tabs: Tab[] = [
       "Region and franchise roles with per-outlet permissions",
       "Group P&L roll-up with branch-level drill-down",
     ],
+    image:
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&q=80&auto=format&fit=crop",
+    imageAlt: "Cafe storefront on a busy street",
   },
 ];
 
@@ -156,7 +170,7 @@ export function Solution() {
               </ul>
             </div>
 
-            <SolutionVisual />
+            <SolutionVisual image={current.image} alt={current.imageAlt} />
           </motion.div>
         </AnimatePresence>
       </Container>
@@ -164,16 +178,17 @@ export function Solution() {
   );
 }
 
-function SolutionVisual() {
+function SolutionVisual({ image, alt }: { image: string; alt: string }) {
   return (
     <div className="relative">
       <div className="relative aspect-[4/5] sm:aspect-[5/4] rounded-3xl overflow-hidden ring-1 ring-line">
         <Image
-          src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/solution-cafe.png"
-          alt="Cafe operations"
+          src={image}
+          alt={alt}
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
           className="object-cover"
+          unoptimized
         />
       </div>
 
