@@ -19,10 +19,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://imapos.com"),
+  metadataBase: new URL("https://mise.app"),
   title: {
-    default: "Imapos — Smarter F&B Operations with Modern POS",
-    template: "%s · Imapos",
+    default: "Mise — Smarter F&B Operations with Modern POS",
+    template: "%s · Mise",
   },
   description:
     "The POS purpose-built for cafes, restaurants, cloud kitchens, and multi-outlet F&B brands. Manage orders, tables, kitchen, inventory and reports — without the legacy POS baggage.",
@@ -37,30 +37,30 @@ export const metadata: Metadata = {
     "inventory management",
     "multi-outlet POS",
   ],
-  authors: [{ name: "Imapos" }],
-  creator: "Imapos",
-  publisher: "Imapos",
+  authors: [{ name: "Mise" }],
+  creator: "Mise",
+  publisher: "Mise",
   openGraph: {
     type: "website",
     locale: "en_AU",
-    url: "https://imapos.com",
-    siteName: "Imapos",
-    title: "Imapos — Smarter F&B Operations with Modern POS",
+    url: "https://mise.app",
+    siteName: "Mise",
+    title: "Mise — Smarter F&B Operations with Modern POS",
     description:
       "The POS purpose-built for cafes, restaurants, cloud kitchens, and multi-outlet F&B brands.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Imapos — Smarter F&B Operations with Modern POS",
+    title: "Mise — Smarter F&B Operations with Modern POS",
     description: "The POS purpose-built for F&B operators.",
-    creator: "@imapos",
+    creator: "@getmise",
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  alternates: { canonical: "https://imapos.com" },
+  alternates: { canonical: "https://mise.app" },
 };
 
 export const viewport: Viewport = {

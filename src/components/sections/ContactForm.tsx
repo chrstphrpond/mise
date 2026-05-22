@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -14,23 +14,24 @@ const infoBlocks = [
     icon: Mail,
     title: "Email",
     description:
-      "Drop us a note. A real person replies within 4 business hours, Sydney time.",
-    value: "contact.imapos@arsakami.com",
-    href: "mailto:contact.imapos@arsakami.com",
+      "Send us your questions about Mise features, pricing, or product setup. A real person replies within 4 business hours.",
+    value: "hello@mise.app",
+    href: "mailto:hello@mise.app",
   },
   {
     icon: Phone,
-    title: "Call the team",
+    title: "Call Our Team",
     description:
-      "Pick up the phone — weekdays 9am to 5pm AEST. Demo, pricing, hardware — we'll talk it through.",
+      "Prefer to talk directly? Our team is available weekdays 9am–5pm AEST to help you understand how Mise fits your business.",
     value: "1800 123 4567",
     href: "tel:18001234567",
   },
   {
     icon: MapPin,
     title: "Office",
-    description: "Sydney HQ — stop by for a coffee and a live terminal walkthrough.",
-    value: "Level 1, 12 Sample St, Sydney NSW 2000",
+    description:
+      "Visit our office or reach out to discuss how Mise can support your restaurant operations.",
+    value: "Level 1, 12 Sample St, Sydney NSW 2000 AU",
     href: null,
   },
 ] as const;
@@ -44,11 +45,12 @@ const businessTypes = [
 
 const locationOptions = ["1", "2-5", "6-10", "10+"];
 
-const inputBase =
-  "w-full h-12 rounded-xl bg-surface ring-1 ring-line px-4 text-[15px] text-ink placeholder:text-ink-muted/70 " +
-  "transition-shadow focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-0";
-
-const labelBase = "text-xs font-medium text-ink-muted";
+// Figma uses underline-only inputs: clean field with border-bottom that thickens on focus.
+const fieldWrap = "group flex flex-col gap-3 md:gap-4 pb-4 border-b border-line transition-colors focus-within:border-ink-title";
+const fieldLabel =
+  "text-[17px] md:text-[20px] leading-[1.5] tracking-[-0.01em] text-ink-title font-normal";
+const fieldInput =
+  "w-full bg-transparent text-[17px] md:text-[20px] leading-[1.5] text-ink placeholder:text-ink-muted/80 outline-none border-0 p-0";
 
 export function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -105,40 +107,42 @@ export function ContactForm() {
   }
 
   return (
-    <section className="py-16 md:py-24">
+    <section
+      className="pb-20 md:pb-28"
+      aria-labelledby="contact-form-heading"
+    >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-14">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-12 lg:gap-20 items-start">
           {/* Left: info column */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 md:gap-12">
             {infoBlocks.map((block, i) => {
               const Icon = block.icon;
               return (
                 <motion.div
                   key={block.title}
                   initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "200px" }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="flex flex-col gap-3"
+                  className="flex flex-col gap-5"
                 >
-                  <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-surface-cream text-primary ring-1 ring-primary/15">
-                    <Icon className="size-5" />
+                  <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-surface-cream text-primary ring-1 ring-primary/15">
+                    <Icon className="size-6" strokeWidth={1.75} />
                   </span>
-                  <h3 className="text-lg font-medium text-ink-title">
+                  <h3 className="text-2xl md:text-[28px] lg:text-[32px] leading-tight tracking-[-0.02em] font-medium text-ink-title">
                     {block.title}
                   </h3>
-                  <p className="text-sm text-ink-muted leading-relaxed max-w-xs">
+                  <p className="text-[15px] md:text-base text-ink-muted leading-relaxed">
                     {block.description}
                   </p>
                   {block.href ? (
                     <a
                       href={block.href}
-                      className="text-sm font-medium text-primary hover:text-primary-70 transition-colors"
+                      className="text-[15px] md:text-base font-medium text-ink-title hover:text-primary transition-colors break-words"
                     >
                       {block.value}
                     </a>
                   ) : (
-                    <span className="text-sm font-medium text-ink-title">
+                    <span className="text-[15px] md:text-base font-medium text-ink-title">
                       {block.value}
                     </span>
                   )}
@@ -147,25 +151,28 @@ export function ContactForm() {
             })}
           </div>
 
-          {/* Right: form card */}
+          {/* Right: heading + form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "200px" }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl bg-surface ring-1 ring-line p-6 md:p-10 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_20px_60px_-30px_rgba(12,12,12,0.15)]"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col gap-10 md:gap-12"
           >
-            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-ink-title">
-              Tell us about your operation
+            <h2
+              id="contact-form-heading"
+              className="text-[32px] md:text-[40px] lg:text-5xl leading-tight tracking-[-0.02em] font-medium text-ink-title"
+            >
+              Get In Touch
             </h2>
-            <p className="mt-2 text-sm text-ink-muted">
-              A few details and we&apos;ll come back within 4 business hours with a tailored demo time.
-            </p>
 
-            <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="firstName" className={labelBase}>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-8"
+              noValidate
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className={fieldWrap}>
+                  <label htmlFor="firstName" className={fieldLabel}>
                     First Name
                   </label>
                   <input
@@ -175,30 +182,29 @@ export function ContactForm() {
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="Jane"
-                    className={inputBase}
+                    placeholder="Type your full name"
+                    className={fieldInput}
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="lastName" className={labelBase}>
-                    Last Name
+                <div className={fieldWrap}>
+                  <label htmlFor="lastName" className={fieldLabel}>
+                    Business Name
                   </label>
                   <input
                     id="lastName"
                     name="lastName"
                     type="text"
-                    required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    placeholder="Doe"
-                    className={inputBase}
+                    placeholder="Enter business name"
+                    className={fieldInput}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="email" className={labelBase}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className={fieldWrap}>
+                  <label htmlFor="email" className={fieldLabel}>
                     Email Address
                   </label>
                   <input
@@ -208,12 +214,12 @@ export function ContactForm() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@company.com"
-                    className={inputBase}
+                    placeholder="Enter email address"
+                    className={fieldInput}
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="phone" className={labelBase}>
+                <div className={fieldWrap}>
+                  <label htmlFor="phone" className={fieldLabel}>
                     Phone Number
                   </label>
                   <input
@@ -222,78 +228,77 @@ export function ContactForm() {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+61 400 000 000"
-                    className={inputBase}
+                    placeholder="Enter phone number"
+                    className={fieldInput}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="businessType" className={labelBase}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className={fieldWrap}>
+                  <label htmlFor="businessType" className={fieldLabel}>
                     Business Type
                   </label>
-                  <select
-                    id="businessType"
-                    name="businessType"
-                    value={businessType}
-                    onChange={(e) => setBusinessType(e.target.value)}
-                    className={cn(inputBase, "appearance-none pr-10 bg-no-repeat")}
-                    style={{
-                      backgroundImage:
-                        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352525b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\")",
-                      backgroundPosition: "right 1rem center",
-                      backgroundSize: "16px 16px",
-                    }}
-                  >
-                    {businessTypes.map((b) => (
-                      <option key={b} value={b}>
-                        {b}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="businessType"
+                      name="businessType"
+                      value={businessType}
+                      onChange={(e) => setBusinessType(e.target.value)}
+                      className={cn(fieldInput, "appearance-none pr-8 cursor-pointer")}
+                    >
+                      {businessTypes.map((b) => (
+                        <option key={b} value={b}>
+                          {b}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      aria-hidden
+                      className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 size-5 text-ink-muted"
+                      strokeWidth={1.75}
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="locations" className={labelBase}>
+                <div className={fieldWrap}>
+                  <label htmlFor="locations" className={fieldLabel}>
                     Number of Locations
                   </label>
-                  <select
-                    id="locations"
-                    name="locations"
-                    value={locations}
-                    onChange={(e) => setLocations(e.target.value)}
-                    className={cn(inputBase, "appearance-none pr-10 bg-no-repeat")}
-                    style={{
-                      backgroundImage:
-                        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352525b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\")",
-                      backgroundPosition: "right 1rem center",
-                      backgroundSize: "16px 16px",
-                    }}
-                  >
-                    {locationOptions.map((l) => (
-                      <option key={l} value={l}>
-                        {l}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="locations"
+                      name="locations"
+                      value={locations}
+                      onChange={(e) => setLocations(e.target.value)}
+                      className={cn(fieldInput, "appearance-none pr-8 cursor-pointer")}
+                    >
+                      {locationOptions.map((l) => (
+                        <option key={l} value={l}>
+                          {l}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      aria-hidden
+                      className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 size-5 text-ink-muted"
+                      strokeWidth={1.75}
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="message" className={labelBase}>
+              <div className={fieldWrap}>
+                <label htmlFor="message" className={fieldLabel}>
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={5}
+                  rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="What does your operation look like today, and what's the one thing you'd fix first? (Concept, outlets, current POS, hardware — anything helps.)"
-                  className={cn(
-                    inputBase,
-                    "h-auto py-3 resize-y leading-relaxed",
-                  )}
+                  placeholder="Tell us about your business or what you'd like to learn about Mise."
+                  className={cn(fieldInput, "resize-y leading-relaxed min-h-[96px]")}
                 />
               </div>
 
@@ -308,25 +313,31 @@ export function ContactForm() {
                   {status === "sending" ? "Sending…" : "Send Message"}
                 </Button>
 
-                {status === "success" ? (
-                  <motion.span
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-sm text-primary font-medium"
-                  >
-                    Got it — Maria from the team will reply within 4 business hours.
-                  </motion.span>
-                ) : null}
-
-                {status === "error" ? (
-                  <motion.span
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-sm text-red-600 font-medium"
-                  >
-                    {errorMsg ?? "That didn't send — give it another shot, or email contact.imapos@arsakami.com directly."}
-                  </motion.span>
-                ) : null}
+                <div
+                  className="text-sm font-medium"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {status === "success" ? (
+                    <motion.span
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-primary"
+                    >
+                      Got it — Maria from the team will reply within 4 business hours.
+                    </motion.span>
+                  ) : null}
+                  {status === "error" ? (
+                    <motion.span
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-600"
+                    >
+                      {errorMsg ??
+                        "That didn't send — give it another shot, or email hello@mise.app directly."}
+                    </motion.span>
+                  ) : null}
+                </div>
               </div>
             </form>
           </motion.div>

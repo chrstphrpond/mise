@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Imapos — Smarter F&B Operations with Modern POS";
+export const alt = "Mise — Smarter F&B Operations with Modern POS";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -78,14 +78,14 @@ export default async function OGImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            fontSize: 36,
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
+            fontSize: 44,
+            fontWeight: 600,
+            letterSpacing: "-0.04em",
             position: "relative",
           }}
         >
-          <span style={{ color: "#a27b5c" }}>IMA</span>
-          <span style={{ color: "#121212" }}>POS</span>
+          <span style={{ color: "#a27b5c" }}>m</span>
+          <span style={{ color: "#121212" }}>ise</span>
         </div>
 
         {/* Main copy */}
@@ -152,7 +152,7 @@ export default async function OGImage() {
               letterSpacing: "-0.01em",
             }}
           >
-            imapos.com
+            mise.app
           </div>
           <div
             style={{

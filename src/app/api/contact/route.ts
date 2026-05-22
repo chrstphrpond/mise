@@ -6,7 +6,7 @@ const resend = process.env.RESEND_API_KEY
   : null;
 
 const TO = "maquidatochristopher@gmail.com";
-const FROM = "Imapos Contact <onboarding@resend.dev>";
+const FROM = "Mise Contact <onboarding@resend.dev>";
 
 type ContactPayload = {
   firstName?: string;
@@ -61,10 +61,10 @@ export async function POST(req: Request) {
   }
 
   const fullName = `${firstName} ${lastName}`.trim();
-  const subject = `New Imapos contact: ${fullName} · ${businessType || "Unknown"}`;
+  const subject = `New Mise contact: ${fullName} · ${businessType || "Unknown"}`;
 
   const text = [
-    "New contact form submission from imapos.com",
+    "New contact form submission from mise.app",
     "",
     `Name:           ${fullName}`,
     `Email:          ${email}`,

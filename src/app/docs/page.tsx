@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 export const metadata = {
   title: "Docs",
   description:
-    "Operator handbook and API reference for Imapos. Get a new outlet live in a weekend.",
+    "Operator handbook and API reference for Mise. Get a new outlet live in a weekend.",
 };
 
 type DocSection = {
@@ -17,7 +17,7 @@ const sections: DocSection[] = [
   {
     title: "Get started",
     description:
-      "Open a new outlet on Imapos — from menu import to first close-out.",
+      "Open a new outlet on Mise — from menu import to first close-out.",
     items: [
       {
         label: "Outlet setup in a weekend",
@@ -37,7 +37,7 @@ const sections: DocSection[] = [
     ],
   },
   {
-    title: "Operating Imapos",
+    title: "Operating Mise",
     description: "Daily workflows for the front, the kitchen, and the back office.",
     items: [
       {
@@ -60,7 +60,7 @@ const sections: DocSection[] = [
   {
     title: "Developer",
     description:
-      "REST API, webhooks, and SDKs for building on top of Imapos (Enterprise).",
+      "REST API, webhooks, and SDKs for building on top of Mise (Enterprise).",
     items: [
       {
         label: "Authentication",
@@ -83,7 +83,7 @@ export default function DocsPage() {
     <>
       <InfoPageHero
         eyebrow="Documentation"
-        title={<>Everything you need to run Imapos</>}
+        title={<>Everything you need to run Mise</>}
         description="An operator handbook plus an API reference for developers. Most cafes get to first sale on the day the docs land in their inbox."
       />
       <section className="py-16 md:py-24">

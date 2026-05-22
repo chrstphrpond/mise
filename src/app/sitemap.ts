@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const base = "https://imapos.com";
+  const base = "https://mise.app";
 
   const routes: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
     { path: "", priority: 1, changeFrequency: "monthly" },

@@ -1,11 +1,11 @@
-# Imapos
+# Mise
 
 A production-grade F&B POS SaaS landing page — re-implemented from scratch in **Next.js 16** with deliberate UX upgrades over the original design source.
 
 > Built as a portfolio piece: take a polished Webflow template, rebuild it in modern React/Next, and push the interaction design further than the source. Honest attribution at the bottom.
 
-**Live demo:** [imapos.vercel.app](https://imapos.vercel.app)
-**Repo:** [github.com/chrstphrpond/imapos](https://github.com/chrstphrpond/imapos)
+**Live demo:** [mise.vercel.app](https://mise.vercel.app)
+**Repo:** [github.com/chrstphrpond/mise](https://github.com/chrstphrpond/mise)
 
 ---
 
@@ -87,7 +87,7 @@ The Webflow source is a strong static design. This rebuild adds real interaction
 
 ## Performance
 
-Lighthouse — desktop preset, single run against [imapos.vercel.app](https://imapos.vercel.app):
+Lighthouse — desktop preset, single run against [mise.vercel.app](https://mise.vercel.app):
 
 | Category | Score |
 | --- | --- |
@@ -109,7 +109,7 @@ Performance is the obvious next win — the hero ships motion/GSAP eagerly on fi
 pnpm install
 
 # Secrets are managed via Doppler (no .env files in the repo)
-doppler setup        # link this dir to project: imapos / config: dev
+doppler setup        # link this dir to project: mise / config: dev
 doppler run -- pnpm dev
 
 # Build + start (production)
@@ -138,7 +138,7 @@ vercel
 vercel --prod
 ```
 
-The repo is already linked to project `imapos` (team `crit-projects`). Doppler's Vercel Marketplace integration auto-syncs the `prd` config — no env vars are managed in the Vercel dashboard directly.
+The repo is already linked to project `mise` (team `crit-projects`). Doppler's Vercel Marketplace integration auto-syncs the `prd` config — no env vars are managed in the Vercel dashboard directly.
 
 ---
 

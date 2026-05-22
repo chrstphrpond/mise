@@ -75,7 +75,7 @@ export function Testimonial() {
               Businesses Everywhere
             </>
           }
-          description="See how cafe owners and restaurant managers use Imapos to simplify operations, reduce errors, and gain clearer visibility over their business performance."
+          description="See how cafe owners and restaurant managers use Mise to simplify operations, reduce errors, and gain clearer visibility over their business performance."
         />
 
         <AnimatePresence mode="wait">
@@ -90,22 +90,22 @@ export function Testimonial() {
             {visible.map((q) => (
               <article
                 key={q.name}
-                className="flex flex-col rounded-3xl bg-surface ring-1 ring-line p-7 hover:ring-primary/30 transition"
+                className="flex flex-col rounded-[32px] bg-surface ring-1 ring-line p-8 hover:ring-primary/30 transition"
               >
                 <BrandLogo brand={q.brand} size="md" />
-                <p className="mt-5 flex-1 text-ink-title leading-relaxed">
+                <p className="mt-10 flex-1 text-ink-title text-base md:text-[17px] leading-[1.55]">
                   &ldquo;{q.quote}&rdquo;
                 </p>
-                <div className="mt-6 flex items-center gap-3">
+                <div className="mt-6 flex items-center gap-4">
                   <div
-                    className="size-10 rounded-full"
+                    className="size-12 rounded-full shrink-0"
                     style={{
                       background: `linear-gradient(135deg, ${q.hue}, ${q.hue}99)`,
                     }}
                   />
-                  <div className="text-sm">
-                    <p className="font-medium text-ink-title">{q.name}</p>
-                    <p className="text-ink-muted">{q.role}</p>
+                  <div className="text-base">
+                    <p className="font-semibold text-ink-title leading-tight">{q.name}</p>
+                    <p className="text-ink-muted text-sm leading-tight mt-0.5">{q.role}</p>
                   </div>
                 </div>
               </article>

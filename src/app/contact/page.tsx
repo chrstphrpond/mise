@@ -3,9 +3,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQ } from "@/components/sections/FAQ";
 
 export const metadata = {
-  title: "Contact — Imapos",
+  title: "Contact — Mise",
   description:
-    "Talk to our team about how Imapos can power your F&B operations.",
+    "Talk to our team about how Mise can power your F&B operations.",
 };
 
 export default function ContactPage() {

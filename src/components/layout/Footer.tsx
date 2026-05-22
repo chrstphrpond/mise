@@ -66,11 +66,11 @@ const utilityLinks = [
 ];
 
 const socials = [
-  { href: "https://www.facebook.com/imapos", label: "Facebook", Icon: Facebook },
-  { href: "https://www.instagram.com/imapos", label: "Instagram", Icon: Instagram },
-  { href: "https://x.com/imapos", label: "X", Icon: XIcon },
-  { href: "https://www.linkedin.com/company/imapos", label: "LinkedIn", Icon: Linkedin },
-  { href: "https://www.youtube.com/@imapos", label: "YouTube", Icon: Youtube },
+  { href: "https://www.facebook.com/getmise", label: "Facebook", Icon: Facebook },
+  { href: "https://www.instagram.com/getmise", label: "Instagram", Icon: Instagram },
+  { href: "https://x.com/getmise", label: "X", Icon: XIcon },
+  { href: "https://www.linkedin.com/company/getmise", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://www.youtube.com/@getmise", label: "YouTube", Icon: Youtube },
 ];
 
 export function Footer() {
@@ -94,11 +94,13 @@ export function Footer() {
           <div className="flex-1 flex flex-col gap-8 min-w-0">
             <Link
               href="/"
-              aria-label="Imapos home"
+              aria-label="Mise home"
               className="inline-flex items-center font-display font-bold tracking-tight"
             >
-              <span className="text-[33px] leading-[1.2] text-primary">IMA</span>
-              <span className="text-[33px] leading-[1.2] text-secondary">POS</span>
+              <span className="text-[40px] leading-[1.2] lowercase tracking-tight">
+                <span className="text-primary">m</span>
+                <span className="text-secondary">ise</span>
+              </span>
             </Link>
 
             <div className="flex flex-col gap-6 text-ink">
@@ -109,7 +111,7 @@ export function Footer() {
               <div className="flex flex-col gap-1">
                 <p className="text-base font-medium tracking-[-0.32px]">Contact:</p>
                 <p className="text-sm">1800 123 4567</p>
-                <p className="text-sm">contact.imapos@arsakami.com</p>
+                <p className="text-sm">hello@mise.app</p>
               </div>
             </div>
 
@@ -120,7 +122,7 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Imapos on ${label}`}
+                  aria-label={`Mise on ${label}`}
                   className="inline-flex size-6 items-center justify-center text-ink hover:text-primary transition-colors"
                 >
                   <Icon className="size-full" />

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 export const metadata = {
   title: "Status",
   description:
-    "Real-time status of Imapos services — POS terminal, kitchen display, dashboard, and payments.",
+    "Real-time status of Mise services — POS terminal, kitchen display, dashboard, and payments.",
 };
 
 type System = {
@@ -70,7 +70,7 @@ export default function StatusPage() {
             <>Some systems are reporting issues</>
           )
         }
-        description="Live status of every Imapos service. Subscribe to incident updates by email below."
+        description="Live status of every Mise service. Subscribe to incident updates by email below."
       />
       <section className="py-16 md:py-24">
         <Container>
@@ -109,7 +109,7 @@ export default function StatusPage() {
                 degradation before your customers do.
               </p>
               <a
-                href="mailto:status@imapos.com?subject=Subscribe%20to%20status%20updates"
+                href="mailto:status@mise.app?subject=Subscribe%20to%20status%20updates"
                 className="mt-5 inline-flex items-center justify-center rounded-full bg-primary text-white px-6 h-11 text-[15px] font-medium hover:bg-primary-70 transition-colors"
               >
                 Subscribe by email

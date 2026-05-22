@@ -16,7 +16,7 @@ const STATS: StatItem[] = [
   {
     target: 1200,
     format: (v) => `${Math.round(v).toLocaleString()}+`,
-    label: "Outlets running Imapos daily",
+    label: "Outlets running Mise daily",
   },
   {
     target: 1.8,

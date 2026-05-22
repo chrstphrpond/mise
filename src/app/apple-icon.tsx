@@ -25,25 +25,15 @@ export default function AppleIcon() {
           style={{
             display: "flex",
             alignItems: "baseline",
-            fontSize: 84,
-            fontWeight: 700,
-            letterSpacing: "-0.05em",
+            fontSize: 92,
+            fontWeight: 600,
+            letterSpacing: "-0.06em",
             lineHeight: 1,
           }}
         >
-          <span style={{ color: "#a27b5c" }}>IM</span>
+          <span style={{ color: "#a27b5c" }}>m</span>
+          <span style={{ color: "#121212" }}>ise</span>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            top: 22,
-            right: 22,
-            width: 14,
-            height: 14,
-            borderRadius: 9999,
-            background: "#a27b5c",
-          }}
-        />
       </div>
     ),
     { ...size },

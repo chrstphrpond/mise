@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Crown, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
@@ -158,9 +158,9 @@ export function Pricing() {
         <div className="mt-10 flex items-center justify-center gap-3">
           <BillingToggle yearly={yearly} setYearly={setYearly} />
           <motion.span
-            animate={{ scale: yearly ? 1 : 0.95, opacity: yearly ? 1 : 0.6 }}
+            animate={{ scale: yearly ? 1 : 0.95, opacity: yearly ? 1 : 0.7 }}
             transition={{ duration: 0.25 }}
-            className="inline-flex items-center gap-1 rounded-full bg-primary-10 px-2.5 py-1 text-[11px] font-medium text-primary-90 ring-1 ring-primary/25"
+            className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium text-white shadow-sm"
           >
             <Sparkles className="size-3" /> Save 20%
           </motion.span>
@@ -190,7 +190,7 @@ export function Pricing() {
                 className={cn(
                   "relative flex h-full flex-col rounded-[22px] p-7 md:p-8 ring-1 transition-shadow duration-300",
                   p.highlighted
-                    ? "bg-secondary-90 ring-secondary-80 text-white shadow-[0_30px_60px_-30px_rgba(63,78,79,0.5)] lg:py-10"
+                    ? "bg-primary-90 ring-primary text-white shadow-[0_30px_45px_-15px_rgba(162,123,92,0.35)] lg:py-10"
                     : "bg-surface ring-line text-ink-title hover:shadow-[0_20px_40px_-25px_rgba(12,12,12,0.18)]",
                 )}
               >
@@ -198,7 +198,7 @@ export function Pricing() {
                   <div>
                     <h3
                       className={cn(
-                        "text-2xl font-medium tracking-tight",
+                        "text-[28px] md:text-[32px] font-display font-medium tracking-[-0.02em] leading-tight",
                         p.highlighted ? "text-white" : "text-ink-title",
                       )}
                     >
@@ -219,7 +219,7 @@ export function Pricing() {
                 <div className="mt-6 flex items-baseline gap-1.5">
                   <span
                     className={cn(
-                      "text-5xl",
+                      "text-[56px] md:text-[64px] leading-none tracking-[-0.02em]",
                       p.highlighted ? "text-white" : "text-ink-title",
                     )}
                   >
@@ -230,7 +230,7 @@ export function Pricing() {
                   </span>
                   <span
                     className={cn(
-                      "text-sm",
+                      "text-lg md:text-xl",
                       p.highlighted ? "text-primary-10/70" : "text-ink-muted",
                     )}
                   >
@@ -275,8 +275,8 @@ export function Pricing() {
 
                 <p
                   className={cn(
-                    "text-[11px] uppercase tracking-[0.14em] font-semibold",
-                    p.highlighted ? "text-primary-10/70" : "text-ink-muted",
+                    "text-sm font-semibold",
+                    p.highlighted ? "text-white" : "text-ink-title",
                   )}
                 >
                   {p.featuresHeading}
@@ -404,8 +404,8 @@ function BillingToggle({
 
 function PopularBadge() {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-white ring-1 ring-primary-70">
-      <span className="size-1.5 rounded-full bg-white" />
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-primary-70 px-3 py-1 text-xs font-medium text-white ring-1 ring-primary-70/70">
+      <Crown className="size-3.5" />
       Most Popular
     </span>
   );
