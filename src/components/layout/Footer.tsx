@@ -204,8 +204,7 @@ export function Footer() {
           <div className="h-px w-full bg-ink/10" />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-ink-muted">
-              © {new Date().getFullYear()} Mise Operations Pty Ltd. Sydney
-              &middot; Singapore. ABN 12 345 678 901.
+              © {new Date().getFullYear()} Mise Operations Pty Ltd &middot; Sydney &amp; Singapore
             </p>
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <Link
