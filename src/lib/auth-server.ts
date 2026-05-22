@@ -4,9 +4,6 @@ import { magicLink } from "better-auth/plugins";
 import { Resend } from "resend";
 import { db } from "./db/drizzle";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const from = process.env.RESEND_FROM ?? "Mise <noreply@resend.dev>";
-
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg" }),
   baseURL: process.env.BETTER_AUTH_URL,
@@ -15,6 +12,10 @@ export const auth = betterAuth({
   plugins: [
     magicLink({
       sendMagicLink: async ({ email, url }) => {
+        // Resend is constructed per-send so the module can be imported at
+        // build time without RESEND_API_KEY.
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const from = process.env.RESEND_FROM ?? "Mise <noreply@resend.dev>";
         await resend.emails.send({
           from,
           to: email,
