@@ -63,6 +63,9 @@ importers:
       '@remotion/google-fonts':
         specifier: ^4.0.465
         version: 4.0.465(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@remotion/light-leaks':
+        specifier: ^4.0.465
+        version: 4.0.465(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@remotion/transitions':
         specifier: ^4.0.465
         version: 4.0.465(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -746,6 +749,12 @@ packages:
 
   '@remotion/licensing@4.0.465':
     resolution: {integrity: sha512-GjziQqExSkeZIn4YCNjdq+0i2lGHbaVnwUAFQfzs3f5JSnfzYPjaRjpUB2FeQ5yaxWpnDH4kllkDCD2TZSC9fw==}
+
+  '@remotion/light-leaks@4.0.465':
+    resolution: {integrity: sha512-lcj79dhtH8mi24w+ErsbDJFlc33C0nPsOI015wriLFE9/PGUj6mK4tN5jHPfQ9ALejS162EmyQMcKsEW2LkmVQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@remotion/media-parser@4.0.465':
     resolution: {integrity: sha512-A79JseiqY2dUV4wt3ORp288io7XkfkSe5ZdCrjlX/ASlAy4HMf4DcbtXnbtTmOsSTzQNf9grsM9G1GTEIztK9g==}
@@ -3610,6 +3619,13 @@ snapshots:
       - react-dom
 
   '@remotion/licensing@4.0.465': {}
+
+  '@remotion/light-leaks@4.0.465(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      remotion: 4.0.465(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      zod: 4.3.6
 
   '@remotion/media-parser@4.0.465': {}
 
