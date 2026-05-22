@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { BlurTextEffect } from "@/components/ui/BlurTextEffect";
 import { LogoStrip } from "@/components/sections/LogoStrip";
 import { HeroTilt } from "@/components/visuals/HeroTilt";
 
@@ -16,80 +17,12 @@ const FULL_HEADLINE = `${HEADLINE_PREFIX} ${HEADLINE_CONNECTOR} ${HEADLINE_HIGHL
 
 const EASE_OUT_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-function AnimatedChars({
-  text,
-  startIndex = 0,
-  className,
-  blur = true,
-}: {
-  text: string;
-  startIndex?: number;
-  className?: string;
-  /**
-   * When false, the per-char reveal uses only opacity + y. Required for chars
-   * inside a `bg-clip-text` parent — a `filter` on the child creates a new
-   * stacking context that detaches from the parent's text mask, making the
-   * gradient text invisible. Pass `blur={false}` for the gradient segment.
-   */
-  blur?: boolean;
-}) {
-  const reduce = useReducedMotion();
-  const words = text.split(" ");
-  const wordStarts = words.reduce<number[]>((acc, word, idx) => {
-    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
-    return acc;
-  }, []);
-  return (
-    <span className={className}>
-      {words.map((word, wIdx) => {
-        const wordStart = wordStarts[wIdx];
-        return (
-          <span
-            key={`${word}-${wIdx}`}
-            className="inline-block whitespace-nowrap"
-          >
-            {Array.from(word).map((ch, i) => {
-              const initial = reduce
-                ? { opacity: 1 }
-                : blur
-                  ? { opacity: 0, y: "0.5em", filter: "blur(8px)" }
-                  : { opacity: 0, y: "0.5em" };
-              const animate = blur
-                ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                : { opacity: 1, y: 0 };
-              return (
-                <motion.span
-                  key={`${ch}-${i}`}
-                  aria-hidden
-                  className="inline-block"
-                  initial={initial}
-                  animate={animate}
-                  transition={{
-                    duration: 0.6,
-                    ease: EASE_OUT_EXPO,
-                    delay: reduce ? 0 : (startIndex + wordStart + i) * 0.02,
-                  }}
-                >
-                  {ch}
-                </motion.span>
-              );
-            })}
-            {wIdx < words.length - 1 ? " " : null}
-          </span>
-        );
-      })}
-    </span>
-  );
-}
+const CONNECTOR_START = HEADLINE_PREFIX.length + 1;
+const HIGHLIGHT_START = CONNECTOR_START + HEADLINE_CONNECTOR.length + 1;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
-
-  const prefixLen = HEADLINE_PREFIX.length;
-  const connectorStart = prefixLen + 1;
-  const connectorLen = HEADLINE_CONNECTOR.length;
-  const highlightStart = connectorStart + connectorLen + 1;
 
   const glowAnimate = prefersReducedMotion
     ? { scale: 1, opacity: 0.7 }
@@ -124,13 +57,12 @@ export function Hero() {
             aria-label={FULL_HEADLINE}
             className="mt-6 max-w-[1100px] text-[clamp(2.5rem,5.4vw,4.75rem)] leading-[1.04] tracking-[-0.03em] font-medium"
           >
-            <AnimatedChars text={HEADLINE_PREFIX} startIndex={0} />
+            <BlurTextEffect srOnly={false}>{HEADLINE_PREFIX}</BlurTextEffect>
             <br className="hidden sm:block" />
             <span className="inline-block">
-              <AnimatedChars
-                text={`${HEADLINE_CONNECTOR} `}
-                startIndex={connectorStart}
-              />
+              <BlurTextEffect startIndex={CONNECTOR_START} srOnly={false}>
+                {`${HEADLINE_CONNECTOR} `}
+              </BlurTextEffect>
               <motion.span
                 aria-hidden
                 className="relative inline-block bg-clip-text text-transparent"
@@ -151,11 +83,13 @@ export function Hero() {
                       }
                 }
               >
-                <AnimatedChars
-                  text={HEADLINE_HIGHLIGHT}
-                  startIndex={highlightStart}
+                <BlurTextEffect
+                  startIndex={HIGHLIGHT_START}
                   blur={false}
-                />
+                  srOnly={false}
+                >
+                  {HEADLINE_HIGHLIGHT}
+                </BlurTextEffect>
               </motion.span>
             </span>
           </h1>
@@ -182,9 +116,6 @@ export function Hero() {
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
               Book a Demo
-            </Button>
-            <Button href="/app" variant="ghost" size="lg" icon>
-              Try the demo
             </Button>
           </motion.div>
         </div>
