@@ -52,6 +52,10 @@ const C = {
 
 const EASE_EXPO_OUT = Easing.bezier(0.16, 1, 0.3, 1);
 const EASE_OUT_QUART = Easing.bezier(0.25, 1, 0.5, 1);
+// Symmetric ease-in-out: slow start → faster mid → slow end. This is the curve
+// cinematic Ken Burns / dolly-in shots use — feels deliberate rather than
+// reactive, which is what ease-out-only on a slow zoom reads as.
+const EASE_ZOOM = Easing.bezier(0.45, 0, 0.55, 1);
 
 // -----------------------------------------------------------------------------
 // Per-char blur reveal (mirrors the site's BlurTextEffect)
@@ -427,18 +431,19 @@ function TaglineReveal({ duration }: { duration: number }) {
 }
 
 // -----------------------------------------------------------------------------
-// Parallax screenshot — splits screenshot into bg + fg layers panning at
-// different rates so the static image feels alive
+// Dolly-in screenshot — scale-only push toward a single focal point. Pan is
+// intentionally absent: combining translate + scale on a slow shot reads as
+// mechanical (the eye sees two moves competing), whereas a single transform
+// around a well-placed origin reads as one fluid camera move.
 // -----------------------------------------------------------------------------
-function ParallaxScreen({
+function DollyIn({
   src,
   duration,
-  fromScale = 1.04,
-  toScale = 1.12,
+  fromScale = 1.0,
+  toScale = 1.06,
   originX = 50,
   originY = 50,
-  panX = 0,
-  panY = 0,
+  objectPositionY = "top",
 }: {
   src: string;
   duration: number;
@@ -446,22 +451,13 @@ function ParallaxScreen({
   toScale?: number;
   originX?: number;
   originY?: number;
-  panX?: number;
-  panY?: number;
+  objectPositionY?: string;
 }) {
   const frame = useCurrentFrame();
   const t = frame / duration;
   const scale = interpolate(t, [0, 1], [fromScale, toScale], {
     extrapolateRight: "clamp",
-    easing: EASE_OUT_QUART,
-  });
-  const tx = interpolate(t, [0, 1], [0, panX], {
-    extrapolateRight: "clamp",
-    easing: EASE_OUT_QUART,
-  });
-  const ty = interpolate(t, [0, 1], [0, panY], {
-    extrapolateRight: "clamp",
-    easing: EASE_OUT_QUART,
+    easing: EASE_ZOOM,
   });
 
   return (
@@ -472,8 +468,8 @@ function ParallaxScreen({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          objectPosition: "center top",
-          transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
+          objectPosition: `center ${objectPositionY}`,
+          transform: `scale(${scale})`,
           transformOrigin: `${originX}% ${originY}%`,
           willChange: "transform",
         }}
@@ -654,38 +650,23 @@ function SectionChip({
 }
 
 // -----------------------------------------------------------------------------
-// B3 · Hero wide — full marketing site rolling in from below with motion blur
+// B3 · Hero wide — full marketing site, slow dolly-in toward the headline.
+// The push lands at roughly the framing B4 will start from, so the light leak
+// between them reads as a continuous camera move into the iPad mockup rather
+// than a teleport.
 // -----------------------------------------------------------------------------
 function HeroWide({ duration }: { duration: number }) {
-  const frame = useCurrentFrame();
-  const enter = interpolate(frame, [0, 18], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: EASE_EXPO_OUT,
-  });
-  const motionBlur = (1 - enter) * 6;
-  const y = (1 - enter) * 60;
-
   return (
     <AbsoluteFill>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          transform: `translateY(${y}px)`,
-          filter: `blur(${motionBlur}px)`,
-        }}
-      >
-        <ParallaxScreen
-          src="screens/01-hero.png"
-          duration={duration}
-          fromScale={1.02}
-          toScale={1.08}
-          originX={50}
-          originY={30}
-          panY={-12}
-        />
-      </div>
+      <DollyIn
+        src="screens/01-hero.png"
+        duration={duration}
+        fromScale={1.0}
+        toScale={1.08}
+        originX={50}
+        originY={62}
+        objectPositionY="top"
+      />
       <SectionChip
         index={1}
         total={5}
@@ -698,36 +679,28 @@ function HeroWide({ duration }: { duration: number }) {
 }
 
 // -----------------------------------------------------------------------------
-// B4 · Hero detail — dramatic zoom INTO the iPad mockup in the lower half
+// B4 · Hero detail — continues the dolly from B3 deeper into the iPad mockup.
+// Starts at roughly the framing B3 ended at (scale ~1.10 around the lower
+// half), ends tight on the dashboard tile so the menu items and order column
+// are readable. Match-cut motion, not a teleport.
 // -----------------------------------------------------------------------------
 function HeroDetail({ duration }: { duration: number }) {
-  const frame = useCurrentFrame();
-  const t = frame / duration;
-  const scale = interpolate(t, [0, 1], [1.4, 1.9], {
-    extrapolateRight: "clamp",
-    easing: EASE_OUT_QUART,
-  });
-
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ overflow: "hidden", background: C.cream }}>
-        <Img
-          src={staticFile("screens/01-hero.png")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center 78%",
-            transform: `scale(${scale})`,
-            transformOrigin: "50% 80%",
-          }}
-        />
-      </AbsoluteFill>
+      <DollyIn
+        src="screens/01-hero.png"
+        duration={duration}
+        fromScale={1.12}
+        toScale={1.45}
+        originX={50}
+        originY={82}
+        objectPositionY="top"
+      />
       <Callout
         x={50}
-        y={62}
+        y={70}
         label="Operator dashboard"
-        appearAt={12}
+        appearAt={14}
         duration={duration}
         side="right"
       />
@@ -741,18 +714,17 @@ function HeroDetail({ duration }: { duration: number }) {
 function SolutionScene({ duration }: { duration: number }) {
   return (
     <AbsoluteFill>
-      <ParallaxScreen
+      <DollyIn
         src="screens/02-solution.png"
         duration={duration}
-        fromScale={1.06}
-        toScale={1.14}
-        originX={50}
+        fromScale={1.02}
+        toScale={1.08}
+        originX={42}
         originY={50}
-        panX={-18}
       />
       <Callout
-        x={30}
-        y={52}
+        x={32}
+        y={50}
         label="Front of house"
         appearAt={16}
         duration={duration}
@@ -848,11 +820,11 @@ function FeaturesScene({ duration }: { duration: number }) {
   return (
     <AbsoluteFill>
       <div style={{ position: "absolute", inset: 0, filter: "blur(1.5px) brightness(0.95)" }}>
-        <ParallaxScreen
+        <DollyIn
           src="screens/03-features.png"
           duration={duration}
-          fromScale={1.08}
-          toScale={1.15}
+          fromScale={1.06}
+          toScale={1.10}
         />
       </div>
       <div
@@ -893,14 +865,13 @@ function PricingScene({ duration }: { duration: number }) {
 
   return (
     <AbsoluteFill>
-      <ParallaxScreen
+      <DollyIn
         src="screens/04-pricing.png"
         duration={duration}
-        fromScale={1.04}
-        toScale={1.10}
+        fromScale={1.02}
+        toScale={1.07}
         originX={50}
-        originY={55}
-        panY={-10}
+        originY={58}
       />
       <div
         style={{
