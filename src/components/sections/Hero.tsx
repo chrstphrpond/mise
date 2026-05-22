@@ -26,12 +26,14 @@ function AnimatedChars({
   className?: string;
 }) {
   const words = text.split(" ");
-  let charOffset = 0;
+  const wordStarts = words.reduce<number[]>((acc, word, idx) => {
+    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
+    return acc;
+  }, []);
   return (
     <span className={className}>
       {words.map((word, wIdx) => {
-        const wordStart = charOffset;
-        charOffset += word.length + 1;
+        const wordStart = wordStarts[wIdx];
         return (
           <span
             key={`${word}-${wIdx}`}

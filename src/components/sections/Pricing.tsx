@@ -87,14 +87,11 @@ const plans: Plan[] = [
 ];
 
 function useAnimatedPrice(target: number, duration = 380) {
-  const [value, setValue] = useState(target);
   const prefersReducedMotion = useReducedMotion();
+  const [value, setValue] = useState(target);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setValue(target);
-      return;
-    }
+    if (prefersReducedMotion) return;
     const start = value;
     const delta = target - start;
     if (delta === 0) return;
@@ -111,7 +108,7 @@ function useAnimatedPrice(target: number, duration = 380) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, duration, prefersReducedMotion]);
 
-  return value;
+  return prefersReducedMotion ? target : value;
 }
 
 function AnimatedPrice({ value, highlighted }: { value: number; highlighted?: boolean }) {

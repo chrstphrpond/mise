@@ -3,7 +3,6 @@
 
 import type { MenuItem, Order, Outlet } from "./schema";
 
-type Modifier = { name: string; options: string[] };
 type OrderItem = {
   menuItemId: string;
   name: string;
@@ -274,7 +273,6 @@ function seed(): Store {
 
 // Singleton — survives across hot-module reloads in dev too.
 declare global {
-  // eslint-disable-next-line no-var
   var __miseDemoStore: Store | undefined;
 }
 
