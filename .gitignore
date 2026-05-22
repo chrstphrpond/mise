@@ -56,3 +56,6 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /.playwright/
+remotion/out/
+.agents/
+.claude/scheduled_tasks.lock

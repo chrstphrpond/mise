@@ -9,7 +9,10 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "remotion": "remotion studio",
+    "remotion:render": "remotion render MiseReel remotion/out/mise-reel.mp4",
+    "remotion:still": "remotion still MiseReel remotion/out/still.png"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -30,6 +33,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
+    "@remotion/cli": "^4.0.465",
+    "@remotion/google-fonts": "^4.0.465",
+    "@remotion/transitions": "^4.0.465",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
