@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
@@ -20,6 +21,10 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const linkHref = (href: string) =>
+    href.startsWith("#") && !isHome ? `/${href}` : href;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -41,7 +46,6 @@ export function Navbar() {
         <motion.nav
           initial={false}
           animate={{
-            backgroundColor: scrolled ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,1)",
             boxShadow: scrolled
               ? "0 10px 40px -20px rgba(12,12,12,0.18)"
               : "0 4px 24px -16px rgba(12,12,12,0.08)",
@@ -49,7 +53,7 @@ export function Navbar() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className={cn(
             "flex items-center justify-between gap-6 rounded-full pl-6 pr-2 py-2 md:pl-8 md:pr-2",
-            "ring-1 ring-line/60 backdrop-blur-xl",
+            "bg-white ring-1 ring-line/60",
           )}
         >
           <Logo />
@@ -58,7 +62,7 @@ export function Navbar() {
             {links.map((l) => (
               <li key={l.href}>
                 <Link
-                  href={l.href}
+                  href={linkHref(l.href)}
                   className="relative inline-flex items-center px-3 py-2 text-sm text-ink-muted hover:text-ink transition-colors"
                 >
                   {l.label}
@@ -68,7 +72,7 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <Button href="#cta" variant="primary" size="md" className="hidden sm:inline-flex">
+            <Button href={linkHref("#cta")} variant="primary" size="md" className="hidden sm:inline-flex">
               Get Started
             </Button>
             <button
@@ -97,7 +101,7 @@ export function Navbar() {
                 {links.map((l) => (
                   <li key={l.href}>
                     <Link
-                      href={l.href}
+                      href={linkHref(l.href)}
                       onClick={() => setOpen(false)}
                       className="block rounded-xl px-2 py-3 text-[17px] leading-tight text-ink hover:bg-surface-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                     >
@@ -108,7 +112,7 @@ export function Navbar() {
               </ul>
               <div className="mt-4" onClick={() => setOpen(false)}>
                 <Button
-                  href="#cta"
+                  href={linkHref("#cta")}
                   variant="primary"
                   size="lg"
                   className="w-full"
