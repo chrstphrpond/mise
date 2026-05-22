@@ -25,6 +25,7 @@ function AnimatedChars({
   startIndex?: number;
   className?: string;
 }) {
+  const reduce = useReducedMotion();
   const words = text.split(" ");
   const wordStarts = words.reduce<number[]>((acc, word, idx) => {
     acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
@@ -44,12 +45,16 @@ function AnimatedChars({
                 key={`${ch}-${i}`}
                 aria-hidden
                 className="inline-block"
-                initial={{ opacity: 0, y: "0.5em" }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={
+                  reduce
+                    ? { opacity: 1 }
+                    : { opacity: 0, y: "0.5em", filter: "blur(8px)" }
+                }
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{
                   duration: 0.6,
                   ease: EASE_OUT_EXPO,
-                  delay: (startIndex + wordStart + i) * 0.02,
+                  delay: reduce ? 0 : (startIndex + wordStart + i) * 0.02,
                 }}
               >
                 {ch}
