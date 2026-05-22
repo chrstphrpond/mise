@@ -56,7 +56,10 @@ export default async function WelcomePage() {
         />
       </div>
 
-      <form action={enterDemoAction} className="mt-10 flex flex-wrap items-center gap-3">
+      <form
+        action={enterDemoAction}
+        className="mt-10 flex flex-wrap items-center gap-3"
+      >
         <Button type="submit" variant="primary" size="lg">
           Enter demo
         </Button>
@@ -65,10 +68,15 @@ export default async function WelcomePage() {
             Or sign in with email
           </Button>
         ) : null}
-        <Button href="/" variant="ghost" size="lg">
-          Back to home
-        </Button>
       </form>
+      <p className="mt-4 text-[13px] text-ink-muted">
+        <a
+          href="/"
+          className="underline underline-offset-2 hover:text-ink"
+        >
+          ← Back to the marketing site
+        </a>
+      </p>
     </div>
   );
 }

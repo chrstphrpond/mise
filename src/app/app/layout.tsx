@@ -49,7 +49,10 @@ export default async function AppLayout({
               </div>
             ) : null}
 
-            <AppNav />
+            {/* Only render dashboard nav when a session exists — otherwise the
+                links bounce users back to /app/welcome (per the proxy gate),
+                which reads as bait-and-switch. */}
+            {user ? <AppNav /> : null}
 
             <div className="mt-auto pt-4">
               {user ? (
