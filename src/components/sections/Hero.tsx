@@ -20,10 +20,18 @@ function AnimatedChars({
   text,
   startIndex = 0,
   className,
+  blur = true,
 }: {
   text: string;
   startIndex?: number;
   className?: string;
+  /**
+   * When false, the per-char reveal uses only opacity + y. Required for chars
+   * inside a `bg-clip-text` parent — a `filter` on the child creates a new
+   * stacking context that detaches from the parent's text mask, making the
+   * gradient text invisible. Pass `blur={false}` for the gradient segment.
+   */
+  blur?: boolean;
 }) {
   const reduce = useReducedMotion();
   const words = text.split(" ");
@@ -40,26 +48,32 @@ function AnimatedChars({
             key={`${word}-${wIdx}`}
             className="inline-block whitespace-nowrap"
           >
-            {Array.from(word).map((ch, i) => (
-              <motion.span
-                key={`${ch}-${i}`}
-                aria-hidden
-                className="inline-block"
-                initial={
-                  reduce
-                    ? { opacity: 1 }
-                    : { opacity: 0, y: "0.5em", filter: "blur(8px)" }
-                }
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{
-                  duration: 0.6,
-                  ease: EASE_OUT_EXPO,
-                  delay: reduce ? 0 : (startIndex + wordStart + i) * 0.02,
-                }}
-              >
-                {ch}
-              </motion.span>
-            ))}
+            {Array.from(word).map((ch, i) => {
+              const initial = reduce
+                ? { opacity: 1 }
+                : blur
+                  ? { opacity: 0, y: "0.5em", filter: "blur(8px)" }
+                  : { opacity: 0, y: "0.5em" };
+              const animate = blur
+                ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                : { opacity: 1, y: 0 };
+              return (
+                <motion.span
+                  key={`${ch}-${i}`}
+                  aria-hidden
+                  className="inline-block"
+                  initial={initial}
+                  animate={animate}
+                  transition={{
+                    duration: 0.6,
+                    ease: EASE_OUT_EXPO,
+                    delay: reduce ? 0 : (startIndex + wordStart + i) * 0.02,
+                  }}
+                >
+                  {ch}
+                </motion.span>
+              );
+            })}
             {wIdx < words.length - 1 ? " " : null}
           </span>
         );
@@ -140,6 +154,7 @@ export function Hero() {
                 <AnimatedChars
                   text={HEADLINE_HIGHLIGHT}
                   startIndex={highlightStart}
+                  blur={false}
                 />
               </motion.span>
             </span>

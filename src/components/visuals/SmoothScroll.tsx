@@ -17,7 +17,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         autoRaf: true,
         lerp: 0.1,
         // Intercept in-page anchor links and offset for the sticky navbar.
-        anchors: { offset: 80 },
+        anchors: { offset: 96 },
       }}
     >
       {children}

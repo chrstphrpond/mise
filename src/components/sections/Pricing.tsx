@@ -414,7 +414,7 @@ function AnimatedGradientBorder() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -inset-px rounded-[24px] opacity-90"
+      className="pricing-rotate pointer-events-none absolute -inset-px rounded-[24px] opacity-90"
       style={{
         background:
           "conic-gradient(from var(--angle, 0deg), rgba(162,123,92,0) 0%, rgba(162,123,92,0.85) 18%, rgba(108,82,61,0.85) 30%, rgba(162,123,92,0) 50%, rgba(162,123,92,0) 100%)",
@@ -431,7 +431,7 @@ function AnimatedGradientBorder() {
           to { --angle: 360deg; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .animate-pricing-rotate { animation: none; }
+          .pricing-rotate { animation: none !important; }
         }
       `}</style>
     </div>

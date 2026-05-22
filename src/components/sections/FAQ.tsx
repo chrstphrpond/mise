@@ -197,7 +197,6 @@ export function FAQ() {
               fill
               sizes="(min-width: 1024px) 656px, 100vw"
               className="object-cover"
-              unoptimized
             />
             {/* iPad mockup floating bottom-center — matches Figma 529×352 */}
             <div className="absolute left-1/2 bottom-0 w-[82%] max-w-[529px] -translate-x-1/2 translate-y-[12%] drop-shadow-[-7px_40px_39px_rgba(162,123,92,0.4)]">
@@ -209,8 +208,7 @@ export function FAQ() {
                   fill
                   sizes="(min-width: 1024px) 529px, 90vw"
                   className="object-contain"
-                  unoptimized
-                />
+                    />
                 {/* Screen content overlay — inset to fit inside the iPad bezel */}
                 <div className="absolute inset-[3.45%_2.96%_6.13%_2.96%] overflow-hidden">
                   <Image
@@ -219,8 +217,7 @@ export function FAQ() {
                     fill
                     sizes="(min-width: 1024px) 497px, 85vw"
                     className="object-cover object-top"
-                    unoptimized
-                  />
+                        />
                 </div>
               </div>
             </div>
