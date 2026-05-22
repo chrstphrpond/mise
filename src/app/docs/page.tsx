@@ -83,7 +83,7 @@ export default function DocsPage() {
     <>
       <InfoPageHero
         eyebrow="Documentation"
-        title={<>Everything you need to run Mise</>}
+        title="Everything you need to run Mise"
         description="An operator handbook plus an API reference for developers. Most cafes get to first sale on the day the docs land in their inbox."
       />
       <section className="py-16 md:py-24">

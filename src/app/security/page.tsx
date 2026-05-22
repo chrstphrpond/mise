@@ -12,7 +12,7 @@ export default function SecurityPage() {
     <>
       <InfoPageHero
         eyebrow="Security"
-        title={<>Security at Mise</>}
+        title="Security at Mise"
         description="The short version: payment data never touches our servers, and operator data is encrypted at rest in Sydney. The long version is below."
       />
       <InfoPageBody

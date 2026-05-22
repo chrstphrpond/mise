@@ -68,7 +68,7 @@ export default function ChangelogPage() {
     <>
       <InfoPageHero
         eyebrow="Changelog"
-        title={<>What we shipped this month</>}
+        title="What we shipped this month"
         description="Mise ships every two weeks. Notable changes land here; the boring ones go to the in-app release notes."
       />
       <section className="py-16 md:py-24">

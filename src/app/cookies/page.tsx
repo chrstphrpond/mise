@@ -11,7 +11,7 @@ export default function CookiesPage() {
     <>
       <InfoPageHero
         eyebrow="Legal"
-        title={<>Cookies &amp; Tracking</>}
+        title="Cookies & Tracking"
         description="Mise keeps cookies to a minimum. Here is exactly what we set, why, and how you can opt out."
       />
       <InfoPageBody

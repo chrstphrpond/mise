@@ -12,7 +12,7 @@ export default function TermsPage() {
     <>
       <InfoPageHero
         eyebrow="Legal"
-        title={<>Terms of Service</>}
+        title="Terms of Service"
         description="The rules of the road for using Mise — billing, uptime, data ownership, and what happens if things go sideways."
       />
       <InfoPageBody
