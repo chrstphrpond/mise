@@ -43,7 +43,7 @@ I picked up Arsakami's [Imapos POS SaaS Webflow template](https://www.figma.com/
 
 - **`unoptimized` on the hero `next/image`.** Turbopack's dev-mode `srcset` desyncs against remote Blob URLs with cache-busting query strings, causing a flash on first paint. I flipped `unoptimized` on the hero (only) to get deterministic dev/prod parity. A cleaner fix would be a custom loader or self-hosting that one asset through `/public`.
 - **Some Figma PNG exports still carry the old "IMAPOS" wordmark baked into the pixels.** The handful affected are inside laptop/iPad mockup screenshots where the rebrand only changed the surrounding chrome, not the bitmap. Either a quick Photoshop pass or a re-export from a forked Figma file.
-- **`imapos.vercel.app`, not a custom domain.** A `.com` would close the loop on the portfolio framing. Cheap, just not done yet.
+- **`mise-pos.vercel.app`, not a custom domain.** A `.com` would close the loop on the portfolio framing. Cheap, just not done yet.
 
 ## Tech notes
 
