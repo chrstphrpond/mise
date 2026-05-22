@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { BlurTextEffect } from "@/components/ui/BlurTextEffect";
 import { isLiveMode } from "@/lib/db/client";
-import { hasDemoCookie } from "@/lib/auth";
+import { currentUser, hasDemoCookie } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { enterDemoAction } from "../actions";
 import { Database, Lock, Zap } from "lucide-react";
@@ -12,8 +12,11 @@ export const metadata = {
 };
 
 export default async function WelcomePage() {
-  // If already in a session, skip the welcome screen.
   if (await hasDemoCookie()) redirect("/app/today");
+  if (isLiveMode) {
+    const user = await currentUser();
+    if (user && !user.demo) redirect("/app/today");
+  }
 
   return (
     <div className="rounded-3xl bg-white ring-1 ring-line/70 shadow-[0_30px_80px_-30px_rgba(12,12,12,0.18)] p-8 md:p-12">
@@ -35,13 +38,21 @@ export default async function WelcomePage() {
         />
         <Feature
           icon={<Database className="size-4" />}
-          title="In-memory store"
-          body="Resets when the server restarts. Set DATABASE_URL to switch to Neon."
+          title={isLiveMode ? "Neon Postgres" : "In-memory store"}
+          body={
+            isLiveMode
+              ? "Live mode — data persists across requests via Drizzle + Neon."
+              : "Resets when the server restarts. Set DATABASE_URL to switch to Neon."
+          }
         />
         <Feature
           icon={<Lock className="size-4" />}
-          title="Cookie auth"
-          body="A short-lived demo cookie scopes you to a sandbox outlet."
+          title={isLiveMode ? "Demo or sign-in" : "Cookie auth"}
+          body={
+            isLiveMode
+              ? "Try the sandbox cookie path, or sign in via magic link for a per-user outlet."
+              : "A short-lived demo cookie scopes you to a sandbox outlet."
+          }
         />
       </div>
 
@@ -49,14 +60,14 @@ export default async function WelcomePage() {
         <Button type="submit" variant="primary" size="lg">
           Enter demo
         </Button>
-        <Button href="/" variant="secondary" size="lg">
+        {isLiveMode ? (
+          <Button href="/app/sign-in" variant="secondary" size="lg">
+            Or sign in with email
+          </Button>
+        ) : null}
+        <Button href="/" variant="ghost" size="lg">
           Back to home
         </Button>
-        {isLiveMode ? (
-          <span className="text-xs text-ink-muted">
-            Live mode detected — Clerk + Neon connected.
-          </span>
-        ) : null}
       </form>
     </div>
   );

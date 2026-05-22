@@ -33,14 +33,14 @@ function parseModifiers(raw: string): { name: string; options: string[] }[] {
     .filter((x): x is { name: string; options: string[] } => x !== null);
 }
 
-async function requireUserId() {
+async function requireUser() {
   const user = await currentUser();
   if (!user) throw new Error("Unauthorized");
-  return user.id;
+  return user;
 }
 
 export async function createMenuItem(formData: FormData) {
-  const userId = await requireUserId();
+  const user = await requireUser();
   const parsed = MenuItemSchema.parse({
     name: formData.get("name"),
     category: formData.get("category"),
@@ -50,8 +50,8 @@ export async function createMenuItem(formData: FormData) {
     active: formData.get("active") ?? 1,
   });
 
-  const client = await db();
-  const outletId = await client.defaultOutletId(userId);
+  const client = await db(user);
+  const outletId = await client.defaultOutletId(user.id);
 
   await client.insertMenu({
     outletId,
@@ -68,7 +68,7 @@ export async function createMenuItem(formData: FormData) {
 }
 
 export async function updateMenuItemAction(formData: FormData) {
-  await requireUserId();
+  const user = await requireUser();
   const id = String(formData.get("id") ?? "");
   if (!id) throw new Error("Missing id");
 
@@ -91,26 +91,26 @@ export async function updateMenuItemAction(formData: FormData) {
     patch.modifiers = parseModifiers(parsed.modifiers);
   if (parsed.active !== undefined) patch.active = parsed.active;
 
-  const client = await db();
+  const client = await db(user);
   await client.updateMenu(id, patch);
   revalidatePath("/app/menu");
 }
 
 export async function toggle86Action(formData: FormData) {
-  await requireUserId();
+  const user = await requireUser();
   const id = String(formData.get("id") ?? "");
   const current = Number(formData.get("active") ?? 1);
   if (!id) throw new Error("Missing id");
-  const client = await db();
+  const client = await db(user);
   await client.updateMenu(id, { active: current === 1 ? 0 : 1 });
   revalidatePath("/app/menu");
 }
 
 export async function deleteMenuItemAction(formData: FormData) {
-  await requireUserId();
+  const user = await requireUser();
   const id = String(formData.get("id") ?? "");
   if (!id) throw new Error("Missing id");
-  const client = await db();
+  const client = await db(user);
   await client.deleteMenu(id);
   revalidatePath("/app/menu");
 }

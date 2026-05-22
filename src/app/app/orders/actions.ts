@@ -8,27 +8,27 @@ import { db } from "@/lib/db/client";
 const StatusSchema = z.enum(["open", "preparing", "ready", "paid"]);
 const ChannelSchema = z.enum(["dine_in", "takeaway", "delivery"]);
 
-async function requireUserId() {
+async function requireUser() {
   const user = await currentUser();
   if (!user) throw new Error("Unauthorized");
-  return user.id;
+  return user;
 }
 
 export async function setOrderStatus(formData: FormData) {
-  await requireUserId();
+  const user = await requireUser();
   const id = String(formData.get("id") ?? "");
   const status = StatusSchema.parse(formData.get("status"));
   if (!id) throw new Error("Missing id");
-  const client = await db();
+  const client = await db(user);
   await client.updateOrderStatus(id, status);
   revalidatePath("/app/orders");
   revalidatePath("/app/today");
 }
 
 export async function simulateOrder() {
-  const userId = await requireUserId();
-  const client = await db();
-  const outletId = await client.defaultOutletId(userId);
+  const user = await requireUser();
+  const client = await db(user);
+  const outletId = await client.defaultOutletId(user.id);
   const menu = await client.listMenu(outletId);
   const active = menu.filter((m) => m.active === 1 && m.stock > 0);
   if (active.length === 0) throw new Error("No active items to order");
