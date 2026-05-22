@@ -43,7 +43,7 @@ export function SectionHeader({
         viewport={{ once: true, margin: "200px" }}
         transition={{ duration: 0.6 }}
         className={cn(
-          "max-w-3xl text-[clamp(2rem,4.5vw,4rem)] leading-[1.05] tracking-[-0.025em] font-medium",
+          "max-w-[920px] text-[clamp(2rem,4.2vw,3.625rem)] leading-[1.08] tracking-[-0.025em] font-medium",
           variant === "dark" ? "text-white" : "text-ink-title",
         )}
       >

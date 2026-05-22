@@ -17,7 +17,7 @@ async function loadFont(weight: 400 | 500 | 700) {
     },
   );
   const css = await res.text();
-  const match = css.match(/src: url\((.+?)\) format\('(opentype|truetype)'\)/);
+  const match = css.match(/src:\s*url\((.+?)\)\s*format\('(?:opentype|truetype|woff2?|woff)'\)/);
   if (!match) throw new Error("Font URL not found");
   const fontRes = await fetch(match[1]);
   return fontRes.arrayBuffer();

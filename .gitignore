@@ -43,6 +43,9 @@ yarn-error.log*
 .playwright-mcp/
 v*-*.png
 imapos-*.png
+audit*.png
+privacy-check.png
+current-*.png
 
 # typescript
 *.tsbuildinfo

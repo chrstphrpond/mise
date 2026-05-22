@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
 
 function Facebook(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -12,10 +10,26 @@ function Facebook(props: React.SVGProps<SVGSVGElement>) {
 }
 function Instagram(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      {...props}
+    >
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function XIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
 }
@@ -44,134 +58,179 @@ const quickLinks = [
 ];
 
 const utilityLinks = [
-  { href: "#", label: "Changelog" },
-  { href: "#", label: "Status" },
-  { href: "#", label: "Security" },
-  { href: "#", label: "Integrations" },
-  { href: "#", label: "Docs" },
+  { href: "#", label: "License" },
+  { href: "#", label: "Style Guide" },
+  { href: "#", label: "Password Protected" },
+  { href: "/404", label: "404" },
+  { href: "/changelog", label: "Changelog" },
 ];
 
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
+const socials = [
+  { href: "https://www.facebook.com/imapos", label: "Facebook", Icon: Facebook },
+  { href: "https://www.instagram.com/imapos", label: "Instagram", Icon: Instagram },
+  { href: "https://x.com/imapos", label: "X", Icon: XIcon },
+  { href: "https://www.linkedin.com/company/imapos", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://www.youtube.com/@imapos", label: "YouTube", Icon: Youtube },
+];
 
 export function Footer() {
   return (
-    <footer
-      className="relative isolate overflow-hidden text-ink"
-      style={{
-        backgroundImage:
-          "radial-gradient(60% 60% at 80% 0%, rgba(162,123,92,0.18) 0%, rgba(162,123,92,0) 60%), radial-gradient(45% 60% at 8% 100%, rgba(63,78,79,0.18) 0%, rgba(63,78,79,0) 70%), linear-gradient(180deg, #fcf7ef 0%, #f3ece1 100%)",
-      }}
-    >
-      <Container className="pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-          {/* Brand + contact */}
-          <div className="md:col-span-5">
-            <Logo size="lg" />
+    <footer className="relative isolate overflow-hidden bg-surface-cream text-ink">
+      {/* Radial color blur decoration matching Figma bg-color-blur */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-0 top-[40%] -z-0 h-[744px] w-full"
+        style={{
+          background:
+            "radial-gradient(40% 70% at 65% 50%, rgba(162,123,92,0.22) 0%, rgba(162,123,92,0) 60%), radial-gradient(35% 60% at 30% 80%, rgba(63,78,79,0.18) 0%, rgba(63,78,79,0) 65%), radial-gradient(30% 50% at 50% 100%, rgba(217,220,220,0.55) 0%, rgba(217,220,220,0) 70%)",
+          filter: "blur(40px)",
+        }}
+      />
 
-            <div className="mt-8 space-y-5 text-sm text-ink-muted">
-              <div>
-                <p className="font-medium text-ink-title">Address:</p>
-                <p className="mt-1">Level 1, 12 Sample St, Sydney NSW 2000</p>
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-16 px-5 py-20 md:px-10 lg:gap-16 lg:px-16">
+        {/* Main content row */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+          {/* Brand + contact column */}
+          <div className="flex-1 flex flex-col gap-8 min-w-0">
+            <Link
+              href="/"
+              aria-label="Imapos home"
+              className="inline-flex items-center font-display font-bold tracking-tight"
+            >
+              <span className="text-[33px] leading-[1.2] text-primary">IMA</span>
+              <span className="text-[33px] leading-[1.2] text-secondary">POS</span>
+            </Link>
+
+            <div className="flex flex-col gap-6 text-ink">
+              <div className="flex flex-col gap-1">
+                <p className="text-base font-medium tracking-[-0.32px]">Address:</p>
+                <p className="text-sm">Level 1, 12 Sample St, Sydney NSW 2000</p>
               </div>
-              <div>
-                <p className="font-medium text-ink-title">Contact:</p>
-                <p className="mt-1">1800 123 4567</p>
-                <p>contact.imapos@arsakami.com</p>
+              <div className="flex flex-col gap-1">
+                <p className="text-base font-medium tracking-[-0.32px]">Contact:</p>
+                <p className="text-sm">1800 123 4567</p>
+                <p className="text-sm">contact.imapos@arsakami.com</p>
               </div>
             </div>
 
-            <div className="mt-8 flex items-center gap-3">
-              {[
-                { href: "#", label: "Facebook", Icon: Facebook },
-                { href: "#", label: "Instagram", Icon: Instagram },
-                { href: "#", label: "X", Icon: XIcon },
-                { href: "#", label: "LinkedIn", Icon: Linkedin },
-                { href: "#", label: "YouTube", Icon: Youtube },
-              ].map(({ href, label, Icon }) => (
+            <div className="flex items-center gap-3">
+              {socials.map(({ href, label, Icon }) => (
                 <a
                   key={label}
                   href={href}
-                  aria-label={label}
-                  className="inline-flex size-9 items-center justify-center rounded-full text-ink hover:bg-ink/10 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Imapos on ${label}`}
+                  className="inline-flex size-6 items-center justify-center text-ink hover:text-primary transition-colors"
                 >
-                  <Icon className="size-[18px]" />
+                  <Icon className="size-full" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick links */}
-          <div className="md:col-span-2">
-            <h4 className="text-sm font-semibold text-ink-title">Quick Links</h4>
-            <ul className="mt-4 space-y-3 text-sm text-ink-muted">
-              {quickLinks.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="hover:text-ink transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Links column (Quick Links + Utilities side-by-side) */}
+          <div className="flex-1 flex flex-col gap-8 sm:flex-row sm:gap-8 min-w-0">
+            <div className="flex-1 flex flex-col gap-4 min-w-0">
+              <p className="text-base font-medium tracking-[-0.32px] text-ink">
+                Quick Links
+              </p>
+              <ul className="flex flex-col">
+                {quickLinks.map((l) => (
+                  <li key={l.label}>
+                    <Link
+                      href={l.href}
+                      className="block py-2 text-sm text-ink hover:text-primary transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex-1 flex flex-col gap-4 min-w-0">
+              <p className="text-base font-medium tracking-[-0.32px] text-ink">
+                Utilities
+              </p>
+              <ul className="flex flex-col">
+                {utilityLinks.map((l) => (
+                  <li key={l.label}>
+                    <Link
+                      href={l.href}
+                      className="block py-2 text-sm text-ink hover:text-primary transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Utilities */}
-          <div className="md:col-span-2">
-            <h4 className="text-sm font-semibold text-ink-title">Utilities</h4>
-            <ul className="mt-4 space-y-3 text-sm text-ink-muted">
-              {utilityLinks.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="hover:text-ink transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA */}
-          <div className="md:col-span-3">
-            <h4 className="text-sm font-semibold text-ink-title">
-              See Imapos on Your Menu
-            </h4>
-            <p className="mt-4 text-sm text-ink-muted">
-              Book a 30-minute walkthrough. Bring your menu PDF — we&apos;ll
-              mirror it on a live terminal during the call.
-            </p>
-            <Button href="/contact" variant="primary" size="md" className="mt-5">
-              Book a Demo
+          {/* Newsletter / CTA column */}
+          <div className="flex flex-col gap-6 lg:w-[400px] lg:shrink-0">
+            <div className="flex flex-col gap-4 text-ink">
+              <p className="text-base font-medium tracking-[-0.32px]">
+                Connect With Us Today
+              </p>
+              <p className="text-base tracking-[-0.32px]">
+                Let&apos;s discuss your next project, connect with our team
+                today for tailored solutions.
+              </p>
+            </div>
+            <Button href="/contact" variant="primary" size="md" className="self-start">
+              Schedule a Call
             </Button>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-ink/10 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-ink-muted">
-          <p>
-            © {new Date().getFullYear()} Imapos Pty Ltd. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="underline underline-offset-2 hover:text-ink">
-              Privacy Policy
-            </a>
-            <a href="#" className="underline underline-offset-2 hover:text-ink">
-              Terms of Service
-            </a>
-            <a href="#" className="underline underline-offset-2 hover:text-ink">
-              Cookies Settings
-            </a>
+        {/* Credits row */}
+        <div className="flex flex-col gap-8">
+          <div className="h-px w-full bg-ink/10" />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-ink">
+              © Designer by{" "}
+              <Link
+                href="/"
+                className="underline underline-offset-2 decoration-from-font hover:text-primary"
+              >
+                Arsakami
+              </Link>
+              , Powered by{" "}
+              <a
+                href="https://webflow.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 decoration-from-font hover:text-primary"
+              >
+                Webflow
+              </a>
+              . All rights reserved.
+            </p>
+            <div className="flex flex-wrap items-center gap-6 text-sm">
+              <Link
+                href="/privacy"
+                className="underline underline-offset-2 decoration-from-font text-ink hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="underline underline-offset-2 decoration-from-font text-ink hover:text-primary"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                href="/cookies"
+                className="underline underline-offset-2 decoration-from-font text-ink hover:text-primary"
+              >
+                Cookies Settings
+              </Link>
+            </div>
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

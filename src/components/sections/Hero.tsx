@@ -101,7 +101,7 @@ export function Hero() {
 
           <h1
             aria-label={FULL_HEADLINE}
-            className="mt-6 max-w-4xl text-[clamp(2.5rem,6vw,5.375rem)] leading-[1.02] tracking-[-0.03em] font-medium"
+            className="mt-6 max-w-[1100px] text-[clamp(2.5rem,5.4vw,4.75rem)] leading-[1.04] tracking-[-0.03em] font-medium"
           >
             <AnimatedChars text={HEADLINE_PREFIX} startIndex={0} />
             <br className="hidden sm:block" />
