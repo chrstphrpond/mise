@@ -50,7 +50,7 @@ const fieldWrap = "group flex flex-col gap-3 md:gap-4 pb-4 border-b border-line 
 const fieldLabel =
   "text-[17px] md:text-[20px] leading-[1.5] tracking-[-0.01em] text-ink-title font-normal";
 const fieldInput =
-  "w-full bg-transparent text-[17px] md:text-[20px] leading-[1.5] text-ink placeholder:text-ink-muted/80 outline-none border-0 p-0";
+  "w-full bg-transparent text-[17px] md:text-[20px] leading-[1.5] text-ink placeholder:text-ink-muted/80 outline-none border-0 p-0 focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:rounded-md";
 
 export function ContactForm() {
   const [firstName, setFirstName] = useState("");

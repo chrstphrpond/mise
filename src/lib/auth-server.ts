@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { magicLink } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 import { Resend } from "resend";
 import { db } from "./db/drizzle";
 
@@ -10,6 +11,9 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   emailAndPassword: { enabled: false },
   plugins: [
+    // Forwards Set-Cookie from `auth.api.*` calls inside Server Actions through
+    // Next's cookies() helper, so signOut etc. actually clear the cookie.
+    nextCookies(),
     magicLink({
       sendMagicLink: async ({ email, url }) => {
         // Resend is constructed per-send so the module can be imported at

@@ -66,6 +66,8 @@ export function OrderCard({ order }: { order: Order }) {
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        aria-controls={`order-${order.id}-details`}
         className="w-full text-left p-4 flex items-start gap-3"
       >
         <div className="flex-1 min-w-0">
@@ -95,7 +97,7 @@ export function OrderCard({ order }: { order: Order }) {
       </button>
 
       {expanded ? (
-        <div className="px-4 pb-4 pt-1 border-t border-line/70">
+        <div id={`order-${order.id}-details`} className="px-4 pb-4 pt-1 border-t border-line/70">
           <ul className="mt-3 space-y-1.5">
             {order.items.map((it, idx) => (
               <li

@@ -57,7 +57,7 @@ export function SignInForm() {
         placeholder="you@restaurant.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full rounded-full border border-line bg-white px-5 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/40"
+        className="w-full rounded-full border border-line bg-white px-5 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:border-primary/40"
       />
       <Button type="submit" variant="primary" size="lg" disabled={status.kind === "sending"}>
         {status.kind === "sending" ? "Sending link…" : "Email me a sign-in link"}

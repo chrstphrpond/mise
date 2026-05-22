@@ -18,9 +18,14 @@ const DEMO_USER: AppUser = {
 };
 
 export async function currentUser(): Promise<AppUser | null> {
+  // In live mode, a real session takes precedence. If none exists, we still
+  // allow the demo cookie path — but only when there is no Better Auth
+  // session cookie at all. A stale demo cookie + real session must resolve
+  // to the real user, never the sandbox.
   if (isLiveMode) {
     const { auth } = await import("./auth-server");
-    const session = await auth.api.getSession({ headers: await headers() });
+    const h = await headers();
+    const session = await auth.api.getSession({ headers: h });
     if (session?.user) {
       return {
         id: session.user.id,
@@ -29,6 +34,10 @@ export async function currentUser(): Promise<AppUser | null> {
         demo: false,
       };
     }
+    // If a Better Auth session cookie is present but the session is invalid
+    // (expired / revoked), do not silently downgrade to demo — return null.
+    const cookieHeader = h.get("cookie") ?? "";
+    if (/(^|;\s*)better-auth\.session_token/.test(cookieHeader)) return null;
   }
 
   const store = await cookies();
