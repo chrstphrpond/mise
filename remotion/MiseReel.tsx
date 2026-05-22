@@ -30,8 +30,8 @@ const BEAT = {
   solution: { from: 205, len: 60 },       // 2.0s — w/ callout
   features: { from: 255, len: 55 },       // 1.83s — quick stack
   pricing: { from: 300, len: 60 },        // 2.0s — glow
-  testimonial: { from: 350, len: 45 },    // 1.5s — typewriter
-  outro: { from: 385, len: 65 },          // 2.17s — slam
+  testimonial: { from: 350, len: 75 },    // 2.5s — typewriter w/ hold
+  outro: { from: 415, len: 65 },          // 2.17s — slam (overlap 10)
 };
 
 export const DURATION_IN_FRAMES = BEAT.outro.from + BEAT.outro.len;
@@ -851,18 +851,13 @@ function FeaturesScene({ duration }: { duration: number }) {
 }
 
 // -----------------------------------------------------------------------------
-// B7 · Pricing — glow ring on a plan + chip
+// B7 · Pricing — dolly in toward the recommended plan, callout pin labels it.
+// Earlier versions drew a glow ring around the Growth card but the screenshot
+// already styles Growth distinctly (dark fill + "Most Popular" chip), so the
+// ring competed with that emphasis and overlapped the Pricing chip / toggle.
+// A callout reuses the same vocabulary as the Solution beat.
 // -----------------------------------------------------------------------------
 function PricingScene({ duration }: { duration: number }) {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const pulse =
-    0.5 + 0.5 * Math.sin((frame / fps) * Math.PI * 1.5);
-  const glowOpacity = interpolate(frame, [10, 30], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
   return (
     <AbsoluteFill>
       <DollyIn
@@ -871,21 +866,15 @@ function PricingScene({ duration }: { duration: number }) {
         fromScale={1.02}
         toScale={1.07}
         originX={50}
-        originY={58}
+        originY={62}
       />
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "52%",
-          transform: "translate(-50%, -50%)",
-          width: 340,
-          height: 420,
-          borderRadius: 28,
-          boxShadow: `0 0 0 3px ${C.primary}, 0 0 ${60 + pulse * 40}px ${20 + pulse * 20}px rgba(162,123,92,0.55)`,
-          opacity: glowOpacity,
-          pointerEvents: "none",
-        }}
+      <Callout
+        x={50}
+        y={62}
+        label="Most popular"
+        appearAt={16}
+        duration={duration}
+        side="right"
       />
       <SectionChip
         index={4}
@@ -906,15 +895,21 @@ function TestimonialScene({ duration }: { duration: number }) {
   const { fps } = useVideoConfig();
 
   const fullText = "“Closes the day in three minutes, not three hours.”";
+  // Type out across the first ~60% of the scene, then hold on the complete
+  // quote so the eye has time to land on the punchline.
+  const typeEnd = Math.floor(duration * 0.6);
   const chars = Math.floor(
-    interpolate(frame, [4, duration - 6], [0, fullText.length], {
+    interpolate(frame, [6, typeEnd], [0, fullText.length], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
       easing: Easing.linear,
     }),
   );
   const shown = fullText.slice(0, chars);
-  const cursorVisible = Math.floor(frame / 8) % 2 === 0;
+  const typedFully = chars >= fullText.length;
+  // Hide the cursor once typing is done so the eye lands on the quote, not
+  // a blinking caret.
+  const cursorVisible = !typedFully && Math.floor(frame / 8) % 2 === 0;
 
   const cardEnter = spring({
     frame,
