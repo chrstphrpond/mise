@@ -90,7 +90,7 @@ export function Solution() {
               F&amp;B Business
             </>
           }
-          description="A cafe at 8am, a 60-cover dining room at 9pm, a cloud kitchen running five brands — Imapos shapes itself to the operation, not the other way around."
+          description="A cafe at 8am, a 60-cover dining room at 9pm, a cloud kitchen running five brands — Mise shapes itself to the operation, not the other way around."
         />
 
         {/* Segmented control */}

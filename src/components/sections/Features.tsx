@@ -49,7 +49,7 @@ const features: Feature[] = [
       "Tickets route by item to hot, cold, and bar. Bump bars, station colors, prep timers — no more shouting across the line, and no more missed mods.",
     image: "https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/feature-kds.png",
     alt: "Kitchen display system",
-    bg: "bg-secondary-90",
+    bg: "bg-secondary-70",
   },
   {
     tag: "Manage stock and variants",
@@ -74,10 +74,10 @@ export function Features() {
               Smarter F&amp;B Operation
             </>
           }
-          description="From taking orders to analyzing revenue, Imapos connects every part of your daily workflow into one integrated system."
+          description="From taking orders to analyzing revenue, Mise connects every part of your daily workflow into one integrated system."
         />
 
-        <div className="mt-12 flex flex-col gap-5">
+        <div className="mt-12 flex flex-col gap-6 md:gap-8">
           {features.map((f, i) => (
             <motion.article
               key={f.title}
@@ -85,21 +85,21 @@ export function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "200px" }}
               transition={{ duration: 0.6, delay: i * 0.05 }}
-              className={`relative isolate overflow-hidden rounded-3xl ${f.bg}`}
+              className={`relative isolate overflow-hidden rounded-[32px] ${f.bg}`}
             >
               <div className="grid grid-cols-1 items-stretch lg:grid-cols-2">
-                <div className="flex flex-col gap-5 justify-center p-8 md:p-12">
-                  <span className="self-start inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-70 px-4 py-1 text-xs font-medium uppercase tracking-wider text-white">
+                <div className="flex flex-col gap-6 justify-center p-8 md:p-12">
+                  <span className="self-start inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-70 px-4 py-1 text-sm font-medium text-white">
                     {f.tag}
                   </span>
-                  <h3 className="text-3xl font-medium tracking-tight text-white md:text-4xl max-w-xl">
+                  <h3 className="text-3xl font-medium tracking-tight text-white md:text-[40px] md:leading-[1.05] max-w-xl">
                     {f.title}
                   </h3>
                   <p className="text-white/80 leading-relaxed max-w-xl">
                     {f.description}
                   </p>
                 </div>
-                <div className="relative min-h-[300px] lg:min-h-[440px]">
+                <div className="relative min-h-[300px] lg:min-h-[460px]">
                   <Image
                     src={f.image}
                     alt={f.alt}

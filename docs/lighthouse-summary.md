@@ -1,6 +1,6 @@
 # Lighthouse Summary
 
-Run against `https://imapos.vercel.app` — desktop preset, single run, headless Chrome.
+Run against `https://mise.vercel.app` — desktop preset, single run, headless Chrome.
 
 | Category | Score |
 | --- | --- |
@@ -14,7 +14,7 @@ Raw report: [`docs/lighthouse.json`](./lighthouse.json).
 To re-run:
 
 ```bash
-pnpm dlx lighthouse https://imapos.vercel.app \
+pnpm dlx lighthouse https://mise.vercel.app \
   --output=json \
   --output-path=./docs/lighthouse.json \
   --chrome-flags="--headless" \

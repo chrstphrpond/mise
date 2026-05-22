@@ -24,7 +24,7 @@ export default function Icon() {
           fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
         }}
       >
-        I
+        m
       </div>
     ),
     { ...size },

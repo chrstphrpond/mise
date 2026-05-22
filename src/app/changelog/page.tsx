@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 export const metadata = {
   title: "Changelog",
   description:
-    "What shipped, what changed, and what is rolling out next on Imapos.",
+    "What shipped, what changed, and what is rolling out next on Mise.",
 };
 
 type Release = {
@@ -69,7 +69,7 @@ export default function ChangelogPage() {
       <InfoPageHero
         eyebrow="Changelog"
         title={<>What we shipped this month</>}
-        description="Imapos ships every two weeks. Notable changes land here; the boring ones go to the in-app release notes."
+        description="Mise ships every two weeks. Notable changes land here; the boring ones go to the in-app release notes."
       />
       <section className="py-16 md:py-24">
         <Container>

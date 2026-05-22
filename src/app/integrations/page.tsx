@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 export const metadata = {
   title: "Integrations",
   description:
-    "Payments, aggregators, accounting, and hardware that Imapos talks to out of the box.",
+    "Payments, aggregators, accounting, and hardware that Mise talks to out of the box.",
 };
 
 type Integration = {
@@ -45,7 +45,7 @@ export default function IntegrationsPage() {
       <InfoPageHero
         eyebrow="Integrations"
         title={<>Plays nicely with what you already use</>}
-        description="Payments, aggregators, accounting, and the hardware on your bench — Imapos talks to them out of the box."
+        description="Payments, aggregators, accounting, and the hardware on your bench — Mise talks to them out of the box."
       />
       <section className="py-16 md:py-24">
         <Container>

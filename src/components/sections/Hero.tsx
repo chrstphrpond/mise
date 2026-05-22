@@ -202,7 +202,7 @@ export function Hero() {
                 <div className="overflow-hidden rounded-[20px] bg-white">
                   <Image
                     src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/hero-ipad-screen.png"
-                    alt="Imapos POS dashboard"
+                    alt="Mise POS dashboard"
                     width={2732}
                     height={2048}
                     priority

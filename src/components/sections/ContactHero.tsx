@@ -16,27 +16,25 @@ export function ContactHero() {
         }}
       />
 
-      <Container className="pt-20 md:pt-28 pb-12 md:pb-16">
+      <Container className="pt-24 md:pt-32 pb-12 md:pb-20">
         <div className="flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Eyebrow>Contact Us</Eyebrow>
+            <Eyebrow>Contact</Eyebrow>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="mt-6 max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.04] tracking-[-0.03em] font-medium"
+            className="mt-6 max-w-[950px] font-medium tracking-[-0.02em] leading-[1.1] md:leading-[1.05] text-[clamp(2.5rem,7vw,5.375rem)]"
           >
-            Talk to Our Team
-            <br className="hidden sm:block" />
-            About{" "}
+            Talk to Our Team About{" "}
             <span className="bg-gradient-to-br from-primary-70 via-primary to-primary-70 bg-clip-text text-transparent">
-              IMAPOS
+              MISE
             </span>
           </motion.h1>
 
@@ -46,9 +44,9 @@ export function ContactHero() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-6 max-w-xl text-base md:text-lg text-ink-muted"
           >
-            Demo request, pricing question, or a hardware list to sanity-check
-            — drop us a line. A real human from the team replies within 4
-            business hours, Sydney time.
+            Have questions about features, pricing, or how Mise can support
+            your F&amp;B operations? A real human from the team replies within
+            4 business hours, Sydney time.
           </motion.p>
         </div>
       </Container>

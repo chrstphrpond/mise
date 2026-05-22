@@ -3,7 +3,7 @@ import { InfoPageBody } from "@/components/sections/InfoPageBody";
 
 export const metadata = {
   title: "Cookies",
-  description: "What cookies Imapos uses and how to control them.",
+  description: "What cookies Mise uses and how to control them.",
 };
 
 export default function CookiesPage() {
@@ -12,7 +12,7 @@ export default function CookiesPage() {
       <InfoPageHero
         eyebrow="Legal"
         title={<>Cookies &amp; Tracking</>}
-        description="Imapos keeps cookies to a minimum. Here is exactly what we set, why, and how you can opt out."
+        description="Mise keeps cookies to a minimum. Here is exactly what we set, why, and how you can opt out."
       />
       <InfoPageBody
         lastUpdated="01 May 2026"
@@ -41,7 +41,7 @@ export default function CookiesPage() {
             heading: "Marketing",
             body: (
               <p>
-                On imapos.com we use a single conversion cookie to measure
+                On mise.app we use a single conversion cookie to measure
                 whether demo requests originated from a paid campaign. You can
                 disable it in the banner shown on your first visit, or via the
                 browser&apos;s Do Not Track signal — we honour it.
@@ -52,7 +52,7 @@ export default function CookiesPage() {
             heading: "Change your mind",
             body: (
               <p>
-                Email privacy@imapos.com or clear your browser cookies and we
+                Email privacy@mise.app or clear your browser cookies and we
                 will re-prompt on next visit.
               </p>
             ),

@@ -74,7 +74,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="lg:hidden inline-flex size-10 items-center justify-center rounded-full text-ink hover:bg-ink/5"
+              className="lg:hidden inline-flex size-11 items-center justify-center rounded-full text-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               aria-label={open ? "Close menu" : "Open menu"}
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -86,34 +86,36 @@ export function Navbar() {
       <AnimatePresence>
         {open ? (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden fixed inset-x-0 top-[76px] z-40 px-4"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="lg:hidden fixed inset-x-0 top-[72px] z-40 px-4"
           >
-            <div className="rounded-3xl bg-surface ring-1 ring-line shadow-2xl p-6">
-              <ul className="flex flex-col gap-1">
+            <div className="rounded-3xl bg-surface ring-1 ring-line/70 shadow-[0_24px_60px_-24px_rgba(12,12,12,0.25)] px-6 pt-2 pb-6">
+              <ul className="flex flex-col">
                 {links.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="block rounded-2xl px-4 py-3 text-base text-ink hover:bg-surface-cream"
+                      className="block rounded-xl px-2 py-3 text-[17px] leading-tight text-ink hover:bg-surface-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                     >
                       {l.label}
                     </Link>
                   </li>
                 ))}
               </ul>
-              <Button
-                href="#cta"
-                variant="primary"
-                size="lg"
-                className="mt-4 w-full"
-              >
-                Get Started
-              </Button>
+              <div className="mt-4" onClick={() => setOpen(false)}>
+                <Button
+                  href="#cta"
+                  variant="primary"
+                  size="lg"
+                  className="w-full"
+                >
+                  Contact Us
+                </Button>
+              </div>
             </div>
           </motion.div>
         ) : null}

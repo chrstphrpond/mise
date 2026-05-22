@@ -4,7 +4,7 @@ import { InfoPageBody } from "@/components/sections/InfoPageBody";
 export const metadata = {
   title: "Security",
   description:
-    "How Imapos protects operator and customer data — infrastructure, access controls, and compliance.",
+    "How Mise protects operator and customer data — infrastructure, access controls, and compliance.",
 };
 
 export default function SecurityPage() {
@@ -12,7 +12,7 @@ export default function SecurityPage() {
     <>
       <InfoPageHero
         eyebrow="Security"
-        title={<>Security at Imapos</>}
+        title={<>Security at Mise</>}
         description="The short version: payment data never touches our servers, and operator data is encrypted at rest in Sydney. The long version is below."
       />
       <InfoPageBody
@@ -21,7 +21,7 @@ export default function SecurityPage() {
             heading: "Infrastructure",
             body: (
               <p>
-                Imapos runs on AWS ap-southeast-2 (Sydney) with multi-AZ
+                Mise runs on AWS ap-southeast-2 (Sydney) with multi-AZ
                 redundancy. Application and database tiers are isolated in
                 private subnets behind a VPC; only the load balancer is
                 publicly addressable. Daily encrypted backups are held in
@@ -33,9 +33,9 @@ export default function SecurityPage() {
             heading: "Payments",
             body: (
               <p>
-                Card data never touches Imapos servers. We tokenise via
+                Card data never touches Mise servers. We tokenise via
                 Stripe, Square, and Adyen — all PCI DSS Level 1 service
-                providers. Imapos itself is PCI DSS SAQ-A scoped, with annual
+                providers. Mise itself is PCI DSS SAQ-A scoped, with annual
                 attestation available on request under NDA.
               </p>
             ),
@@ -57,7 +57,7 @@ export default function SecurityPage() {
                 Operators are role-based by default — cashier, manager, owner,
                 franchise admin. Two-factor authentication is required for
                 owner accounts and enforced for staff with refund or void
-                privileges. Imapos engineers use short-lived SSO credentials
+                privileges. Mise engineers use short-lived SSO credentials
                 with audit logging for every production action.
               </p>
             ),
@@ -77,7 +77,7 @@ export default function SecurityPage() {
             heading: "Report a vulnerability",
             body: (
               <p>
-                Email security@imapos.com with details. We acknowledge within
+                Email security@mise.app with details. We acknowledge within
                 24 hours and operate a responsible-disclosure program with
                 bounty rewards for valid reports — no legal action against
                 good-faith researchers.

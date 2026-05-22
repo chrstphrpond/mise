@@ -9,11 +9,11 @@ import { Container } from "@/components/ui/Container";
 
 const faqs = [
   {
-    q: "What types of businesses can use Imapos?",
-    a: "Imapos is designed for coffee shops, restaurants, cloud kitchens, and multi-outlet F&B brands. Whether you operate a single café or manage several branches, Imapos adapts to your operational needs.",
+    q: "What types of businesses can use Mise?",
+    a: "Mise is designed for coffee shops, restaurants, cloud kitchens, and multi-outlet F&B brands. Whether you operate a single café or manage several branches, Mise adapts to your operational needs.",
   },
   {
-    q: "Does Imapos support kitchen display systems (KDS)?",
+    q: "Does Mise support kitchen display systems (KDS)?",
     a: "Yes — Growth and Enterprise plans include a real-time KDS that mirrors orders from the cashier to every kitchen station with status tracking and bump-bar controls.",
   },
   {
@@ -25,8 +25,8 @@ const faqs = [
     a: "Yes. Define variants (size, sweetness, milk, etc.) and add-ons once, then reuse them across outlets — inventory is automatically deducted as orders go in.",
   },
   {
-    q: "Is Imapos suitable for growing or franchise brands?",
-    a: "Yes. The Enterprise plan adds unlimited outlets, dedicated onboarding, and API access so franchise operations can integrate Imapos into existing back-office systems.",
+    q: "Is Mise suitable for growing or franchise brands?",
+    a: "Yes. The Enterprise plan adds unlimited outlets, dedicated onboarding, and API access so franchise operations can integrate Mise into existing back-office systems.",
   },
 ];
 
@@ -176,7 +176,7 @@ export function FAQ() {
                 Start Running Your F&amp;B Operations Smarter Today
               </h3>
               <p className="text-base leading-[1.5] tracking-[-0.32px]">
-                Bring structure to your daily operations with Imapos. Manage
+                Bring structure to your daily operations with Mise. Manage
                 orders, coordinate your kitchen, track inventory, and monitor
                 sales performance, all from one modern POS system.
               </p>
@@ -197,7 +197,7 @@ export function FAQ() {
             </div>
           </div>
 
-          {/* Right image */}
+          {/* Right image — coffee shop bg + floating iPad mockup */}
           <div className="relative h-[320px] w-full overflow-hidden lg:h-full lg:w-[656px] lg:shrink-0">
             <Image
               src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-bg.png"
@@ -205,32 +205,29 @@ export function FAQ() {
               fill
               sizes="(min-width: 1024px) 656px, 100vw"
               className="object-cover"
+              unoptimized
             />
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(162,123,92,0.55) 0%, rgba(108,82,61,0.35) 100%)",
-              }}
-            />
-            {/* iPad mockup floating */}
-            <div className="absolute left-1/2 bottom-0 w-[110%] -translate-x-1/2 translate-y-6 lg:translate-y-8">
-              <div
-                className="rounded-t-[24px] border-2 border-b-0 border-white p-2 md:p-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(129deg, #e0d3c9 8%, #f2f2f2 105%)",
-                }}
-              >
-                <div className="overflow-hidden rounded-t-[16px] bg-white">
+            {/* iPad mockup floating bottom-center — matches Figma 529×352 */}
+            <div className="absolute left-1/2 bottom-0 w-[82%] max-w-[529px] -translate-x-1/2 translate-y-[12%] drop-shadow-[-7px_40px_39px_rgba(162,123,92,0.4)]">
+              <div className="relative aspect-[529/352] w-full">
+                {/* iPad device frame */}
+                <Image
+                  src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-ipad.png"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 529px, 90vw"
+                  className="object-contain"
+                  unoptimized
+                />
+                {/* Screen content overlay — inset to fit inside the iPad bezel */}
+                <div className="absolute inset-[3.45%_2.96%_6.13%_2.96%] overflow-hidden">
                   <Image
-                    src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/hero-ipad-screen.png"
-                    alt="Imapos POS dashboard preview"
-                    width={2030}
-                    height={1520}
-                    sizes="(min-width: 1024px) 600px, 100vw"
-                    className="block h-auto w-full"
+                    src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-ipad-screen.png"
+                    alt="Mise POS dashboard preview"
+                    fill
+                    sizes="(min-width: 1024px) 497px, 85vw"
+                    className="object-cover object-top"
+                    unoptimized
                   />
                 </div>
               </div>

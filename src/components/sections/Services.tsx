@@ -17,7 +17,7 @@ export function Services() {
               F&amp;B Operations
             </>
           }
-          description="From the first order at open to the close-out report — Imapos covers the moving parts your floor, kitchen, and back office hit every day."
+          description="From the first order at open to the close-out report — Mise covers the moving parts your floor, kitchen, and back office hit every day."
         />
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-5">

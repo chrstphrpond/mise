@@ -23,10 +23,12 @@ export function Logo({
         sizes[size],
         className,
       )}
-      aria-label="Imapos home"
+      aria-label="Mise home"
     >
-      <span className="text-primary">IMA</span>
-      <span className="text-ink-title">POS</span>
+      <span className="lowercase tracking-tight">
+        <span className="text-primary">m</span>
+        <span className="text-ink-title">ise</span>
+      </span>
     </Link>
   );
 }
