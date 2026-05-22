@@ -50,18 +50,18 @@ function Youtube(props: React.SVGProps<SVGSVGElement>) {
 
 const quickLinks = [
   { href: "/#solution", label: "Solution" },
-  { href: "/#services", label: "Service" },
+  { href: "/#services", label: "Services" },
   { href: "/#features", label: "Features" },
   { href: "/#pricing", label: "Pricing" },
-  { href: "/#testimonial", label: "Testimonial" },
+  { href: "/#testimonial", label: "Customers" },
   { href: "/#faq", label: "FAQ" },
 ];
 
 const utilityLinks = [
-  { href: "#", label: "License" },
-  { href: "#", label: "Style Guide" },
-  { href: "#", label: "Password Protected" },
-  { href: "/404", label: "404" },
+  { href: "/docs", label: "Documentation" },
+  { href: "/integrations", label: "Integrations" },
+  { href: "/security", label: "Security" },
+  { href: "/status", label: "System status" },
   { href: "/changelog", label: "Changelog" },
 ];
 
@@ -104,14 +104,26 @@ export function Footer() {
             </Link>
 
             <div className="flex flex-col gap-6 text-ink">
-              <div className="flex flex-col gap-1">
-                <p className="text-base font-medium tracking-[-0.32px]">Address:</p>
-                <p className="text-sm">Level 1, 12 Sample St, Sydney NSW 2000</p>
-              </div>
-              <div className="flex flex-col gap-1">
-                <p className="text-base font-medium tracking-[-0.32px]">Contact:</p>
-                <p className="text-sm">1800 123 4567</p>
-                <p className="text-sm">hello@mise.app</p>
+              <p className="max-w-xs text-sm leading-relaxed text-ink-muted">
+                The POS purpose-built for cafes, restaurants, and multi-outlet
+                F&amp;B brands. Built in Sydney, used across Asia-Pacific.
+              </p>
+              <div className="flex flex-col gap-1.5">
+                <p className="text-[11px] uppercase tracking-[0.14em] text-ink-muted">
+                  Talk to us
+                </p>
+                <a
+                  href="mailto:hello@mise.app"
+                  className="text-sm font-medium text-ink-title hover:text-primary transition-colors"
+                >
+                  hello@mise.app
+                </a>
+                <Link
+                  href="/contact"
+                  className="text-sm text-ink-muted hover:text-primary transition-colors"
+                >
+                  Book a demo →
+                </Link>
               </div>
             </div>
 
@@ -174,15 +186,15 @@ export function Footer() {
           <div className="flex flex-col gap-6 lg:w-[400px] lg:shrink-0">
             <div className="flex flex-col gap-4 text-ink">
               <p className="text-base font-medium tracking-[-0.32px]">
-                Connect With Us Today
+                See Mise on your menu
               </p>
-              <p className="text-base tracking-[-0.32px]">
-                Let&apos;s discuss your next project, connect with our team
-                today for tailored solutions.
+              <p className="text-base tracking-[-0.32px] text-ink-muted">
+                Book a 30-minute walkthrough. Bring your current menu — we&apos;ll
+                mirror it on a live terminal during the call.
               </p>
             </div>
             <Button href="/contact" variant="primary" size="md" className="self-start">
-              Schedule a Call
+              Book a demo
             </Button>
           </div>
         </div>
@@ -191,24 +203,9 @@ export function Footer() {
         <div className="flex flex-col gap-8">
           <div className="h-px w-full bg-ink/10" />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-ink">
-              © Designer by{" "}
-              <Link
-                href="/"
-                className="underline underline-offset-2 decoration-from-font hover:text-primary"
-              >
-                Arsakami
-              </Link>
-              , Powered by{" "}
-              <a
-                href="https://webflow.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 decoration-from-font hover:text-primary"
-              >
-                Webflow
-              </a>
-              . All rights reserved.
+            <p className="text-sm text-ink-muted">
+              © {new Date().getFullYear()} Mise Operations Pty Ltd. Sydney
+              &middot; Singapore. ABN 12 345 678 901.
             </p>
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <Link
