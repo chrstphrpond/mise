@@ -44,7 +44,7 @@ export default function IntegrationsPage() {
     <>
       <InfoPageHero
         eyebrow="Integrations"
-        title={<>Plays nicely with what you already use</>}
+        title="Plays nicely with what you already use"
         description="Payments, aggregators, accounting, and the hardware on your bench — Mise talks to them out of the box."
       />
       <section className="py-16 md:py-24">

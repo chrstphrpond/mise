@@ -63,13 +63,7 @@ export default function StatusPage() {
     <>
       <InfoPageHero
         eyebrow="System Status"
-        title={
-          allGood ? (
-            <>All systems operational</>
-          ) : (
-            <>Some systems are reporting issues</>
-          )
-        }
+        title={allGood ? "All systems operational" : "Some systems are reporting issues"}
         description="Live status of every Mise service. Subscribe to incident updates by email below."
       />
       <section className="py-16 md:py-24">

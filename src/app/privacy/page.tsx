@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <>
       <InfoPageHero
         eyebrow="Legal"
-        title={<>Privacy Policy</>}
+        title="Privacy Policy"
         description="The plain-English version of how we handle your data — what we collect, why, and what you can do about it."
       />
       <InfoPageBody

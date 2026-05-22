@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { BlurTextEffect } from "@/components/ui/BlurTextEffect";
 import { isLiveMode } from "@/lib/db/client";
 import { hasDemoCookie } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -18,7 +19,7 @@ export default async function WelcomePage() {
     <div className="rounded-3xl bg-white ring-1 ring-line/70 shadow-[0_30px_80px_-30px_rgba(12,12,12,0.18)] p-8 md:p-12">
       <Eyebrow>Operator Dashboard · Demo</Eyebrow>
       <h1 className="mt-5 max-w-2xl text-3xl md:text-5xl font-medium tracking-tight leading-[1.05]">
-        A working slice of the Mise back office.
+        <BlurTextEffect>A working slice of the Mise back office.</BlurTextEffect>
       </h1>
       <p className="mt-5 max-w-xl text-base md:text-lg text-ink-muted leading-relaxed">
         This is the same Mise you saw on the landing page — only now it is wired
