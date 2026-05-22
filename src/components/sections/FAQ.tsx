@@ -2,32 +2,31 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { Plus } from "lucide-react";
+import { Plus, X as XIcon, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Button } from "@/components/ui/Button";
 
 const faqs = [
   {
-    q: "Who is Imapos actually built for?",
-    a: "F&B operators — specialty cafes, full-service restaurants, cloud kitchens, and multi-outlet brands. If you're selling food and drink and you care about prep par, void rate, and end-of-day cash, you're our person. Retail or services? We're not the right fit.",
+    q: "What types of businesses can use Imapos?",
+    a: "Imapos is designed for coffee shops, restaurants, cloud kitchens, and multi-outlet F&B brands. Whether you operate a single café or manage several branches, Imapos adapts to your operational needs.",
   },
   {
-    q: "How long does it take to get a new outlet live?",
-    a: "Most single cafes are open on Imapos in a weekend. Menu import, printer setup, and staff training usually run two to three calls. Multi-outlet rollouts take longer — we'll scope it on the demo.",
+    q: "Does Imapos support kitchen display systems (KDS)?",
+    a: "Yes — Growth and Enterprise plans include a real-time KDS that mirrors orders from the cashier to every kitchen station with status tracking and bump-bar controls.",
   },
   {
-    q: "Will it run if my internet drops?",
-    a: "Yes. The terminal keeps taking orders and printing kitchen tickets offline. Once you're back online, every ticket, payment, and stock movement syncs to the cloud automatically.",
+    q: "Can I manage multiple outlets under one account?",
+    a: "Absolutely. Centralized management is built in: push menu, pricing, and promotions to every outlet, and drill into per-location performance from one dashboard.",
   },
   {
-    q: "What about my existing payment terminal and printers?",
-    a: "We support most thermal kitchen printers and cashbox hardware out of the box, and integrate with Stripe, Square, Adyen, and a handful of regional acquirers. Send us your current setup and we'll confirm before you commit.",
+    q: "Does the system support product variants and add-ons?",
+    a: "Yes. Define variants (size, sweetness, milk, etc.) and add-ons once, then reuse them across outlets — inventory is automatically deducted as orders go in.",
   },
   {
-    q: "Can I export my data if it doesn't work out?",
-    a: "Yes — your sales, inventory, and customer data are yours. Full CSV export is one click, and Enterprise plans get API access. No data hostage situations.",
+    q: "Is Imapos suitable for growing or franchise brands?",
+    a: "Yes. The Enterprise plan adds unlimited outlets, dedicated onboarding, and API access so franchise operations can integrate Imapos into existing back-office systems.",
   },
 ];
 
@@ -35,150 +34,210 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-24 py-24 md:py-32 bg-surface-muted">
-      <Container>
-        <SectionHeader
-          eyebrow="Support & Help"
-          title={
-            <>
-              Got Questions? <br className="hidden md:block" />
-              We&apos;ve Got Answers.
-            </>
-          }
-          description={
-            <>
-              Still stuck on something specific?{" "}
-              <a href="/contact" className="text-primary underline underline-offset-4">
-                Ask the team
-              </a>
-            </>
-          }
-        />
+    <section
+      id="faq"
+      className="scroll-mt-24"
+      style={{
+        backgroundImage:
+          "linear-gradient(180deg, rgba(252,247,239,0) 0%, #fcf7ef 100%)",
+      }}
+    >
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-20 px-5 py-20 md:px-10 lg:px-16">
+        {/* Inner container w-768 per Figma */}
+        <div className="flex w-full max-w-[768px] flex-col items-center gap-20">
+          {/* Section title */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "200px" }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center gap-4"
+          >
+            {/* Tag */}
+            <span
+              className="inline-flex items-center rounded-full px-4 py-1 text-base font-medium tracking-[-0.32px] text-white"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #a27b5c 0%, #6c523d 100%)",
+              }}
+            >
+              Support &amp; Help
+            </span>
 
-        <div className="mt-12 mx-auto max-w-3xl">
-          {faqs.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <motion.div
-                key={f.q}
-                initial={{ opacity: 0, y: 6 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "200px" }}
-                transition={{ duration: 0.35, delay: i * 0.03 }}
-                className={`${i > 0 ? "border-t border-line" : ""}`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-panel-${i}`}
-                  id={`faq-trigger-${i}`}
-                  className="w-full flex items-center justify-between gap-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 rounded-md"
+            {/* Heading + sub */}
+            <div className="flex w-full max-w-[768px] flex-col items-center gap-6">
+              <h2 className="text-center font-display text-[clamp(2.5rem,5.5vw,4rem)] font-medium leading-[1.05] tracking-[-1.28px] text-ink-title">
+                Got Questions?
+                <br />
+                We&apos;ve Got Answers.
+              </h2>
+              <div className="flex flex-wrap items-center justify-center gap-2 text-base tracking-[-0.32px] text-ink-muted">
+                <span>Haven&apos;t found solution? Feel free to</span>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full font-medium text-primary hover:text-primary-70 transition-colors"
                 >
-                  <span className="text-lg md:text-xl font-medium text-ink-title">
-                    {f.q}
-                  </span>
-                  <motion.span
-                    aria-hidden
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="inline-flex size-6 items-center justify-center text-ink shrink-0"
+                  Contact Us
+                  <ChevronRight className="size-5" strokeWidth={1.75} />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Accordion list */}
+          <div className="flex w-full flex-col">
+            {faqs.map((f, i) => {
+              const isOpen = open === i;
+              return (
+                <motion.div
+                  key={f.q}
+                  initial={{ opacity: 0, y: 6 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "200px" }}
+                  transition={{ duration: 0.35, delay: i * 0.03 }}
+                  className={`flex w-full flex-col ${i > 0 ? "border-t border-line" : ""}`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-panel-${i}`}
+                    id={`faq-trigger-${i}`}
+                    className="flex w-full items-center gap-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 rounded-md"
                   >
-                    <Plus className="size-5" strokeWidth={1.5} />
-                  </motion.span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen ? (
-                    <motion.div
-                      id={`faq-panel-${i}`}
-                      role="region"
-                      aria-labelledby={`faq-trigger-${i}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                    <span className="flex-1 text-[20px] font-medium leading-[1.5] text-ink-title">
+                      {f.q}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="inline-flex size-6 items-center justify-center text-ink shrink-0"
                     >
-                      <p className="pb-6 text-base text-ink leading-relaxed max-w-2xl">
-                        {f.a}
-                      </p>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                      <AnimatePresence mode="wait" initial={false}>
+                        {isOpen ? (
+                          <motion.span
+                            key="x"
+                            initial={{ rotate: -90, opacity: 0 }}
+                            animate={{ rotate: 0, opacity: 1 }}
+                            exit={{ rotate: 90, opacity: 0 }}
+                            transition={{ duration: 0.18 }}
+                          >
+                            <XIcon className="size-5" strokeWidth={1.5} />
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            key="plus"
+                            initial={{ rotate: 90, opacity: 0 }}
+                            animate={{ rotate: 0, opacity: 1 }}
+                            exit={{ rotate: -90, opacity: 0 }}
+                            transition={{ duration: 0.18 }}
+                          >
+                            <Plus className="size-5" strokeWidth={1.5} />
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen ? (
+                      <motion.div
+                        id={`faq-panel-${i}`}
+                        role="region"
+                        aria-labelledby={`faq-trigger-${i}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-6 text-base leading-[1.5] tracking-[-0.32px] text-ink-title">
+                          {f.a}
+                        </p>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* CTA banner */}
+        {/* CTA Banner (Figma node 2289:15129) */}
         <motion.div
           id="cta"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "200px" }}
           transition={{ duration: 0.6 }}
-          className="mt-16 overflow-hidden rounded-3xl bg-primary text-white ring-1 ring-primary-80"
+          className="relative flex h-auto w-full max-w-[1312px] flex-col overflow-hidden rounded-[32px] bg-primary lg:h-[437px] lg:flex-row lg:items-center"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-0">
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <h3 className="text-3xl md:text-4xl font-medium tracking-tight">
-                Close Tomorrow Night
-                <br className="hidden md:block" /> in Three Minutes Flat
+          {/* Left content */}
+          <div className="flex flex-1 flex-col items-start justify-center gap-8 p-8 md:p-12">
+            <div className="flex w-full flex-col gap-6 text-white">
+              <h3 className="font-display text-[clamp(2rem,4vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.8px]">
+                Start Running Your F&amp;B Operations Smarter Today
               </h3>
-              <p className="mt-4 max-w-md text-primary-10/80">
-                Start a 14-day trial or book a 30-minute demo. We'll mirror your
-                menu, hook up a test printer, and show you the close-out report
-                you'll be running on Friday.
+              <p className="text-base leading-[1.5] tracking-[-0.32px]">
+                Bring structure to your daily operations with Imapos. Manage
+                orders, coordinate your kitchen, track inventory, and monitor
+                sales performance, all from one modern POS system.
               </p>
-              <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <Button href="/contact" variant="dark" size="lg">
-                  Book a Demo
-                </Button>
-                <Button href="#pricing" variant="secondary" size="lg">
-                  Start Free Trial
-                </Button>
-              </div>
             </div>
-            <div className="relative min-h-[320px] lg:min-h-[480px] overflow-hidden">
-              <Image
-                src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-bg.png"
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
+            <div className="flex flex-wrap items-start gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-white px-6 py-3 text-base font-medium tracking-[-0.32px] text-white hover:bg-white/10 transition-colors"
+              >
+                Book a Demo
+              </Link>
+              <Link
+                href="#pricing"
+                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-6 py-3 text-base font-medium tracking-[-0.32px] text-primary hover:bg-surface-cream transition-colors"
+              >
+                Start Free Trial
+              </Link>
+            </div>
+          </div>
+
+          {/* Right image */}
+          <div className="relative h-[320px] w-full overflow-hidden lg:h-full lg:w-[656px] lg:shrink-0">
+            <Image
+              src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/cta-bg.png"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 656px, 100vw"
+              className="object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(162,123,92,0.55) 0%, rgba(108,82,61,0.35) 100%)",
+              }}
+            />
+            {/* iPad mockup floating */}
+            <div className="absolute left-1/2 bottom-0 w-[110%] -translate-x-1/2 translate-y-6 lg:translate-y-8">
               <div
-                aria-hidden
-                className="absolute inset-0"
+                className="rounded-t-[24px] border-2 border-b-0 border-white p-2 md:p-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)]"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(162,123,92,0.55) 0%, rgba(108,82,61,0.35) 100%)",
+                  backgroundImage:
+                    "linear-gradient(129deg, #e0d3c9 8%, #f2f2f2 105%)",
                 }}
-              />
-              <div className="absolute inset-x-6 bottom-0 translate-y-8 md:inset-x-10 lg:left-8 lg:-right-6 lg:translate-y-12">
-                <div
-                  className="rounded-t-[24px] border-2 border-b-0 border-white p-2 md:p-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)]"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(129deg, #e0d3c9 8%, #f2f2f2 105%)",
-                  }}
-                >
-                  <div className="overflow-hidden rounded-t-[16px] bg-white">
-                    <Image
-                      src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/hero-ipad-screen.png"
-                      alt="Imapos POS dashboard preview"
-                      width={2030}
-                      height={1520}
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="block w-full h-auto"
-                    />
-                  </div>
+              >
+                <div className="overflow-hidden rounded-t-[16px] bg-white">
+                  <Image
+                    src="https://udg4m9bnyz7haae7.public.blob.vercel-storage.com/figma-assets/hero-ipad-screen.png"
+                    alt="Imapos POS dashboard preview"
+                    width={2030}
+                    height={1520}
+                    sizes="(min-width: 1024px) 600px, 100vw"
+                    className="block h-auto w-full"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-      </Container>
+      </div>
     </section>
   );
 }
