@@ -20,8 +20,7 @@ import {
   updateOrderStatus,
 } from "./demo-store";
 
-export const isLiveMode =
-  !!process.env.DATABASE_URL && !!process.env.CLERK_SECRET_KEY;
+export const isLiveMode = !!process.env.DATABASE_URL;
 
 export type MenuItemRow = DemoMenuItem;
 export type OrderRow = DemoOrder;
@@ -151,6 +150,17 @@ async function getLiveClient(): Promise<DbClient> {
   return _liveClient;
 }
 
-export async function db(): Promise<DbClient> {
-  return isLiveMode ? getLiveClient() : demoClient;
+/**
+ * Pick the DB client for a given user.
+ *
+ * - Demo-cookie users → the in-memory store, even when DATABASE_URL is set.
+ *   The cookie path is always the "try it without an account" sandbox.
+ * - Real signed-in users → the live Neon Postgres via Drizzle.
+ * - Anonymous/no user → demo store (only reachable from public welcome page).
+ */
+export async function db(
+  user?: { demo: boolean } | null,
+): Promise<DbClient> {
+  if (user && !user.demo && isLiveMode) return getLiveClient();
+  return demoClient;
 }

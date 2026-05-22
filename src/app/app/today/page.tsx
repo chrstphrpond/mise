@@ -11,7 +11,7 @@ export default async function TodayPage() {
   const user = await currentUser();
   if (!user) redirect("/app/welcome");
 
-  const client = await db();
+  const client = await db(user);
   const outletId = await client.defaultOutletId(user.id);
   const orders = await client.listOrders(outletId, 200);
 

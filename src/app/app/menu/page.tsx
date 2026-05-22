@@ -13,7 +13,7 @@ export default async function MenuPage() {
   const user = await currentUser();
   if (!user) redirect("/app/welcome");
 
-  const client = await db();
+  const client = await db(user);
   const outletId = await client.defaultOutletId(user.id);
   const items = await client.listMenu(outletId);
 

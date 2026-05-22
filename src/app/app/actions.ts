@@ -1,8 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { DEMO_COOKIE } from "@/lib/auth";
+import { isLiveMode } from "@/lib/db/client";
 
 export async function enterDemoAction() {
   const store = await cookies();
@@ -18,5 +19,9 @@ export async function enterDemoAction() {
 export async function signOutAction() {
   const store = await cookies();
   store.delete(DEMO_COOKIE);
+  if (isLiveMode) {
+    const { auth } = await import("@/lib/auth-server");
+    await auth.api.signOut({ headers: await headers() });
+  }
   redirect("/app/welcome");
 }

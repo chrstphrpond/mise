@@ -24,6 +24,7 @@ I picked up Arsakami's [Imapos POS SaaS Webflow template](https://www.figma.com/
 - **Motion layer** — character-stagger hero reveal, animated gradient sweep on "Modern POS", iPad pointer-tilt + scroll parallax, viewport-triggered stat count-ups, scroll-progress bar, animated conic-gradient border on the featured pricing card (pure CSS `@property`)
 - **8 hand-built F&B brand SVGs** for the trust strip (cafes, cloud kitchens, multi-outlet QSR) instead of generic Logoipsum filler
 - **Working Resend contact form** (`/api/contact`) with toast feedback, server-side validation, and honeypot anti-spam
+- **Magic-link sign-in for `/app`** — Better Auth + Drizzle + Neon. Email dispatched through the same Resend instance, branded HTML template. Demo-cookie path stays available as the "try without an account" sandbox
 - **Operator-vocabulary copy** across hero, solution tabs, features, FAQ — kills the "AI default" sound
 - **Vercel Blob asset pipeline** for 103 Figma exports + the iPad hero render, served from a separate CDN origin with `cache-control: public, max-age=2592000, immutable`
 - **10+ supporting pages** so every footer link resolves to a real page, not a `#` (`/privacy`, `/terms`, `/cookies`, `/security`, `/status`, `/integrations`, `/docs`, `/changelog`, custom 404)
@@ -41,9 +42,8 @@ I picked up Arsakami's [Imapos POS SaaS Webflow template](https://www.figma.com/
 ## What I'd do differently
 
 - **`unoptimized` on the hero `next/image`.** Turbopack's dev-mode `srcset` desyncs against remote Blob URLs with cache-busting query strings, causing a flash on first paint. I flipped `unoptimized` on the hero (only) to get deterministic dev/prod parity. A cleaner fix would be a custom loader or self-hosting that one asset through `/public`.
-- **No live `RESEND_API_KEY` in prod.** The contact form route is wired, validated, and toast-confirmed, but production is missing the secret — submissions currently log server-side and return 200. Two-minute fix when I'm ready to take real mail.
 - **Some Figma PNG exports still carry the old "IMAPOS" wordmark baked into the pixels.** The handful affected are inside laptop/iPad mockup screenshots where the rebrand only changed the surrounding chrome, not the bitmap. Either a quick Photoshop pass or a re-export from a forked Figma file.
-- **`mise-pos.vercel.app`, not a custom domain.** A `.com` would close the loop on the portfolio framing. Cheap, just not done yet.
+- **`imapos.vercel.app`, not a custom domain.** A `.com` would close the loop on the portfolio framing. Cheap, just not done yet.
 
 ## Tech notes
 
@@ -53,7 +53,7 @@ I picked up Arsakami's [Imapos POS SaaS Webflow template](https://www.figma.com/
 
 **Why motion.dev over framer-motion.** Same team, same API surface, smaller core, direct DOM hooks (`useScroll`, `useTransform`) that compose cleanly with React 19's concurrent rendering. GSAP is still pulled in but only for ScrollTrigger-bound sequences (iPad parallax + stats) where it dominates.
 
-**Auth/DB status.** Contact form is one live backend; the operator dashboard at `/app` is the other (see below). Together they cover the marketing surface and the product surface, with a clean upgrade path from in-memory demo to live Neon + Clerk.
+**Auth/DB status.** Three live backends: the contact form (Resend), the operator dashboard (`/app`, Drizzle + Neon Postgres), and a magic-link sign-in flow (Better Auth, dispatched via the same Resend instance the contact form uses). Demo-cookie users get the in-memory store; signed-in users get their own row in `outlets` and queries run against real Postgres.
 
 ## /app demo
 
@@ -69,15 +69,17 @@ A working operator dashboard at [`/app`](https://mise-pos.vercel.app/app) proves
 
 Data lives in an in-memory module singleton (`src/lib/db/demo-store.ts`). It survives across server requests but resets on cold start, which is the right trade for a portfolio demo where every visitor gets a clean slate.
 
-**Upgrade path — live mode.** Drop in real services by setting:
+**Live mode — magic-link auth on Neon.** When `DATABASE_URL` is set, `src/lib/db/client.ts` switches to Drizzle + Neon and the `/app/sign-in` page lights up. Sign-in is a Better Auth magic-link flow (`POST /api/auth/sign-in/magic-link`); the verification email is dispatched through the same Resend instance the contact form uses. Demo-cookie users still get the in-memory store — the cookie path is always the "try without an account" sandbox, regardless of which backend mode the deployment is in. The split lives in `db(user)`, which picks the client based on `user.demo`.
+
+Required env for live mode:
 
 | Key | Purpose |
 | --- | --- |
-| `DATABASE_URL` | Neon serverless Postgres connection string |
-| `CLERK_SECRET_KEY` | Clerk server-side secret |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key |
-
-When both `DATABASE_URL` and `CLERK_SECRET_KEY` are present, the abstraction in `src/lib/db/client.ts` swaps to Drizzle + Neon and `src/lib/auth.ts` lazy-imports `@clerk/nextjs/server`. The route code is identical in either mode.
+| `DATABASE_URL` | Neon serverless Postgres pooled connection string |
+| `BETTER_AUTH_SECRET` | 32-byte hex secret for session tokens |
+| `BETTER_AUTH_URL` | Public base URL (used for magic-link callback URLs) |
+| `RESEND_API_KEY` | Drives both the contact form and the magic-link emails |
+| `RESEND_FROM` | Sender identity (e.g. `Mise <noreply@resend.dev>`) |
 
 Schema lives in `src/lib/db/schema.ts` (Drizzle, PostgreSQL). Generate migrations with:
 
@@ -106,8 +108,12 @@ Required secrets:
 
 | Key | Purpose |
 | --- | --- |
-| `RESEND_API_KEY` | Contact form delivery |
+| `RESEND_API_KEY` | Contact form + magic-link email delivery |
+| `RESEND_FROM` | Sender identity for both transactional flows |
 | `BLOB_READ_WRITE_TOKEN` | Vercel Blob writes (read is public; auto-provisioned on Vercel) |
+| `DATABASE_URL` | Neon Postgres pooled connection (auto-provisioned via Vercel Marketplace) |
+| `BETTER_AUTH_SECRET` | 32-byte hex for session token signing |
+| `BETTER_AUTH_URL` | Base URL (e.g. `http://localhost:3000` in dev, prod URL in deploys) |
 
 If you don't run Doppler, a local `.env.local` with the same keys works — the app reads `process.env` directly.
 
