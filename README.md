@@ -2,7 +2,7 @@
 
 A restaurant point-of-sale concept expressed through a responsive marketing website, motion-led UI, and a server-side contact form.
 
-[Website](https://mise-pos.vercel.app) · [Portfolio](https://chrstphrpond.dev) · [CI](https://github.com/chrstphrpond/mise/actions/workflows/ci.yml)
+[Website](https://mise-pos.vercel.app) · [Portfolio](https://critdept.com)
 
 ## Overview
 
@@ -21,11 +21,11 @@ The visual starting point is Arsakami's **Imapos POS SaaS Webflow Template**, cr
 - Metadata routes for social images, sitemap, and robots.
 - A Vercel Blob asset manifest and a separate Remotion video composition.
 - Playwright scenarios for the homepage, supporting pages, and contact flow.
-- GitHub Actions configuration for type checking, linting, builds, and browser tests.
+- Type checking, linting and the production build run on every Vercel deploy.
 
 ## Run locally
 
-Use Node.js 24 and pnpm 10 to match the committed CI configuration.
+Use Node.js 24 and pnpm 10.
 
 ```bash
 git clone https://github.com/chrstphrpond/mise.git
@@ -59,7 +59,9 @@ pnpm exec playwright install chromium
 pnpm test:e2e
 ```
 
-Playwright starts a local development server by default. Keep email credentials unset for local smoke tests to avoid sending real messages. The CI link above shows actual run status; the presence of a workflow is not a claim that every check currently passes.
+Every Vercel deploy, preview and production, runs `pnpm typecheck`, `pnpm lint` and `pnpm build` (`buildCommand` in [vercel.json](vercel.json)), so a failing check blocks the deploy. Playwright runs locally: it starts a local development server by default. Keep email credentials unset for local smoke tests to avoid sending real messages.
+
+The GitHub Actions workflow in [.github/workflows/ci.yml](.github/workflows/ci.yml) runs the same checks plus Playwright. It is switched off for now, so the Vercel build is the gate.
 
 ## Code guide
 
@@ -70,7 +72,7 @@ Playwright starts a local development server by default. Keep email credentials 
 | [src/app/api/contact/route.ts](src/app/api/contact/route.ts) | Validation, email delivery, and error handling |
 | [src/lib/blob-manifest.ts](src/lib/blob-manifest.ts) | Hosted asset references |
 | [tests/e2e](tests/e2e) | Browser-level smoke tests |
-| [.github/workflows/ci.yml](.github/workflows/ci.yml) | Verification pipeline |
+| [.github/workflows/ci.yml](.github/workflows/ci.yml) | GitHub Actions pipeline, including Playwright (switched off) |
 | [remotion](remotion) | Video composition source |
 
 ## Stack
