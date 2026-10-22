@@ -8,8 +8,6 @@ A restaurant point-of-sale concept expressed through a responsive marketing webs
 
 Mise is a portfolio implementation for a fictional food-and-beverage software brand. It combines a Next.js marketing site, reusable page sections, interactive motion, supporting information pages, and a Resend-backed contact endpoint.
 
-The visual starting point is Arsakami's **Imapos POS SaaS Webflow Template**, credited below. This repository presents the Mise adaptation and implementation, not an original-from-scratch visual brief.
-
 **Scope:** the public code contains the marketing experience and contact API. It does not contain a working POS, operator dashboard, authentication system, or database-backed order management. Product claims and customer-brand examples on the website belong to the fictional concept.
 
 ## Highlights
@@ -81,12 +79,6 @@ Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Motion · Lenis · Res
 
 ## Limitations
 
-This is a portfolio marketing site, not production restaurant infrastructure. Some source-template imagery retains the original Imapos branding. The contact endpoint would need further production hardening, including abuse prevention and an appropriate data-handling policy, before use with real customer enquiries.
+This is a portfolio marketing site, not production restaurant infrastructure. The visual design is adapted from Arsakami's Imapos Webflow template, and some of its imagery still carries Imapos branding. The contact endpoint would need further production hardening, including abuse prevention and an appropriate data-handling policy, before use with real customer enquiries.
 
-## Credits
-
-- Visual reference: [Imapos POS SaaS Webflow Template by Arsakami](https://www.figma.com/design/cdPUH3to3ARqDQE3Xj63bm/Imapos---POS-Saas-Webflow-Template).
-- Photography: Unsplash. Icons: Lucide.
-- Mise adaptation and development: Christopher Pond Maquidato.
-
-[More design and engineering work](https://chrstphrpond.dev)
+[More design and engineering work](https://critdept.com)
